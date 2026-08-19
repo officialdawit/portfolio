@@ -1,27 +1,29 @@
 import type { LucideIcon } from "lucide-react";
 
 type Props = {
-  index: string;
+  index?: string;
   title: string;
   id?: string;
   Icon?: LucideIcon;
   action?: { text: string; href: string };
 };
 
-export function SectionHead({ index, title, id, Icon, action }: Props) {
+/** Editorial section heading — a title, not a numbered index. */
+export function SectionHead({ title, id, Icon, action }: Props) {
   return (
     <div
       id={id}
-      className="flex items-center gap-3 border-b border-line-soft px-4 py-3 sm:px-6"
+      className="flex items-center gap-3 border-b border-line-soft py-5"
     >
-      <span className="label label-fg">{index}</span>
-      <span aria-hidden className="label text-dim">
-        /
-      </span>
       {Icon ? (
-        <Icon size={13} strokeWidth={1.5} aria-hidden className="text-fg" />
+        <span
+          aria-hidden
+          className="flex h-8 w-8 items-center justify-center rounded-[var(--radius)] border border-line bg-card text-accent"
+        >
+          <Icon size={14} strokeWidth={1.75} />
+        </span>
       ) : null}
-      <h2 className="label label-fg">{title}</h2>
+      <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-fg">{title}</h2>
       {action ? (
         <a
           href={action.href}
@@ -34,25 +36,17 @@ export function SectionHead({ index, title, id, Icon, action }: Props) {
   );
 }
 
-/** Inline label with a leading icon — the `02.1 / ⛬ ROUTING` rhythm. */
 export function MetaLabel({
-  index,
   text,
   Icon,
 }: {
-  index: string;
+  index?: string;
   text: string;
   Icon?: LucideIcon;
 }) {
   return (
-    <span className="flex items-center gap-2.5">
-      <span className="label label-fg">{index}</span>
-      <span aria-hidden className="label text-dim">
-        /
-      </span>
-      {Icon ? (
-        <Icon size={12} strokeWidth={1.5} aria-hidden className="text-fg" />
-      ) : null}
+    <span className="flex items-center gap-2">
+      {Icon ? <Icon size={13} strokeWidth={1.6} aria-hidden className="text-accent" /> : null}
       <span className="label">{text}</span>
     </span>
   );

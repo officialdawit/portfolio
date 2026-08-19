@@ -20,7 +20,7 @@ export function Contact() {
   return (
     <section aria-labelledby="contact" className="border-b border-line-soft">
       <div className="rail">
-        <SectionHead id="contact" index="09" title="Contact" Icon={Mail} />
+        <SectionHead id="contact" title="Contact" Icon={Mail} />
         <div className="px-4 py-14 sm:px-6 sm:py-20">
           <p className="max-w-2xl text-[26px] font-medium leading-snug tracking-[-0.015em] sm:text-[34px]">
             Have something that needs building properly?

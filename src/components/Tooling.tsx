@@ -51,7 +51,7 @@ export function Tooling() {
   return (
     <section aria-labelledby="tooling" className="border-b border-line-soft">
       <div className="rail">
-        <SectionHead id="tooling" index="05" title="Tooling" Icon={Ruler} />
+        <SectionHead id="tooling" title="Tooling" Icon={Ruler} />
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
           {TOOLS.map((t, i) => (
             <Reveal key={t.name} delay={(i % 5) * 30}>

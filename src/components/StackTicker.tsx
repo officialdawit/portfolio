@@ -4,12 +4,10 @@ export function StackTicker() {
   return (
     <section aria-label="Stack" className="border-b border-line-soft">
       <div className="rail grid grid-cols-1 sm:grid-cols-[200px_1fr]">
-        <div className="flex items-center gap-3 border-b border-line-soft px-4 py-3 sm:border-b-0 sm:border-r sm:px-6">
-          <span className="label label-fg">01</span>
-          <span aria-hidden className="label text-dim">
-            /
+        <div className="flex items-center border-b border-line-soft px-5 py-4 sm:border-b-0 sm:border-r sm:px-8">
+          <span className="text-[13px] font-semibold tracking-[-0.01em] text-fg">
+            Built with
           </span>
-          <span className="label">Stack</span>
         </div>
 
         <div className="relative overflow-hidden py-3">

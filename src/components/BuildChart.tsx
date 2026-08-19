@@ -29,7 +29,7 @@ export function BuildChart() {
   return (
     <section aria-labelledby="build" className="border-b border-line-soft">
       <div className="rail">
-        <SectionHead id="build" index="07" title="What this page costs" Icon={Activity} />
+        <SectionHead id="build" title="What this page costs" Icon={Activity} />
 
         <div className="px-4 py-8 sm:px-6">
           <p className="max-w-2xl text-[19px] font-medium leading-snug tracking-[-0.01em] sm:text-[22px]">

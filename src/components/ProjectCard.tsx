@@ -21,7 +21,7 @@ const STATUS_TEXT: Record<Project["status"], string> = {
 };
 
 export function ProjectCard({ project }: { project: Project }) {
-  const { index, kind, name, headline, summary, stack, url, status } = project;
+  const { kind, name, headline, summary, stack, url, status } = project;
   const outcomes = DETAILS[project.slug]?.outcome ?? [];
   const Icon = KIND_ICON[project.slug] ?? Check;
 
@@ -33,10 +33,6 @@ export function ProjectCard({ project }: { project: Project }) {
           className="flex h-8 w-8 shrink-0 items-center justify-center border border-line bg-raised text-fg transition-colors duration-200 group-hover/card:border-strong group-hover/card:bg-fg group-hover/card:text-bg"
         >
           <Icon size={15} strokeWidth={1.5} />
-        </span>
-        <span className="label label-fg">{index}</span>
-        <span aria-hidden className="label text-dim">
-          /
         </span>
         <span className="label">{kind}</span>
         <span className="label ml-auto inline-flex items-center gap-1.5">

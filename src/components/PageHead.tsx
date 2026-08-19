@@ -12,7 +12,7 @@ type Props = {
   meta?: Array<{ k: string; v: string }>;
 };
 
-export function PageHead({ index, eyebrow, title, standfirst, Icon, back, meta }: Props) {
+export function PageHead({ eyebrow, title, standfirst, Icon, back, meta }: Props) {
   return (
     <section className="border-b border-line-soft">
       <div className="rail px-4 py-12 sm:px-6 sm:py-16">
@@ -26,14 +26,12 @@ export function PageHead({ index, eyebrow, title, standfirst, Icon, back, meta }
           </Link>
         ) : null}
 
-        <div className="flex items-center gap-2.5">
-          <span className="label label-fg">{index}</span>
-          <span aria-hidden className="label text-dim">/</span>
-          {Icon ? <Icon size={12} strokeWidth={1.5} aria-hidden className="text-fg" /> : null}
-          <span className="label">{eyebrow}</span>
+        <div className="eyebrow">
+          {Icon ? <Icon size={13} strokeWidth={1.6} aria-hidden className="text-accent" /> : null}
+          <span className="label text-fg">{eyebrow}</span>
         </div>
 
-        <h1 className="mt-6 max-w-3xl text-[30px] font-medium leading-[1.12] tracking-[-0.02em] sm:text-[44px]">
+        <h1 className="mt-6 max-w-3xl text-[34px] font-semibold leading-[1.08] tracking-[-0.03em] sm:text-[52px]">
           {title}
         </h1>
 
