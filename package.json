@@ -9,7 +9,9 @@
     "check": "tsc -b",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:seed": "tsx --env-file=.env scripts/seed.ts"
+    "db:seed": "tsx --env-file=.env scripts/seed.ts",
+    "build:admin": "VITE_TARGET=admin vite build --outDir dist-admin",
+    "dev:admin": "VITE_TARGET=admin vite --port 4174"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

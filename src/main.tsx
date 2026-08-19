@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App";
+// Resolved at build time by the `virtual:app` alias in vite.config.ts.
+// The other target's code is never part of this bundle.
+import App from "virtual:app";
 import "./index.css";
 
 const root = document.getElementById("root");

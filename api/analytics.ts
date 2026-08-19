@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { adminDeploymentOnly } from "./_lib/target";
 import { currentAdmin } from "./_lib/auth";
 import { db } from "./_lib/db";
 
@@ -11,6 +12,7 @@ type Aggregate = { data?: Array<Record<string, unknown>> };
  * The token is read server-side and never reaches the client bundle.
  */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!adminDeploymentOnly(res)) return;
   if (!db) return res.status(503).json({ error: "database_not_configured" });
   if (!(await currentAdmin(req))) return res.status(401).json({ error: "unauthorized" });
 

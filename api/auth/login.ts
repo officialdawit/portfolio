@@ -1,10 +1,12 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { adminDeploymentOnly } from "../_lib/target";
 import { eq } from "drizzle-orm";
 import { createSession, rateLimit, verifyPassword } from "../_lib/auth";
 import { db } from "../_lib/db";
 import { admins } from "../_lib/schema";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!adminDeploymentOnly(res)) return;
   if (req.method !== "POST") return res.status(405).json({ error: "method_not_allowed" });
   if (!db) return res.status(503).json({ error: "database_not_configured" });
 

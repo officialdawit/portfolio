@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { adminDeploymentOnly } from "../_lib/target";
 import { eq } from "drizzle-orm";
 import { requireAdmin } from "../_lib/auth";
 import { db } from "../_lib/db";
@@ -6,6 +7,7 @@ import { projects } from "../_lib/schema";
 import { parseProject } from "../_lib/validate";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!adminDeploymentOnly(res)) return;
   if (!db) return res.status(503).json({ error: "database_not_configured" });
   if (!(await requireAdmin(req, res))) return;
 

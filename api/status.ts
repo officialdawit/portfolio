@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { adminDeploymentOnly } from "./_lib/target";
 import { sql } from "drizzle-orm";
 import { currentAdmin } from "./_lib/auth";
 import { db } from "./_lib/db";
@@ -6,6 +7,7 @@ import { posts, projects, sessions } from "./_lib/schema";
 
 /** Live system health. Admin-only — counts and latency are not public. */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!adminDeploymentOnly(res)) return;
   if (!db) return res.status(503).json({ error: "database_not_configured" });
   if (!(await currentAdmin(req))) return res.status(401).json({ error: "unauthorized" });
 
