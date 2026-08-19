@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { adminDeploymentOnly } from "../_lib/target";
+import { adminDeploymentOnly } from "../_lib/target.js";
 import { asc } from "drizzle-orm";
-import { requireAdmin } from "../_lib/auth";
-import { db } from "../_lib/db";
-import { projects } from "../_lib/schema";
-import { parseProject } from "../_lib/validate";
+import { requireAdmin } from "../_lib/auth.js";
+import { db } from "../_lib/db.js";
+import { projects } from "../_lib/schema.js";
+import { parseProject } from "../_lib/validate.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!adminDeploymentOnly(res)) return;

@@ -1,7 +1,7 @@
 import { and, eq, gt, lt, sql } from "drizzle-orm";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { requireDb } from "./db";
-import { admins, loginAttempts, sessions } from "./schema";
+import { requireDb } from "./db.js";
+import { admins, loginAttempts, sessions } from "./schema.js";
 
 const ITERATIONS = 210_000;
 const SESSION_DAYS = 7;

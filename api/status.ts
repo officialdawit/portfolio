@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { adminDeploymentOnly } from "./_lib/target";
+import { adminDeploymentOnly } from "./_lib/target.js";
 import { sql } from "drizzle-orm";
-import { currentAdmin } from "./_lib/auth";
-import { db } from "./_lib/db";
-import { posts, projects, sessions } from "./_lib/schema";
+import { currentAdmin } from "./_lib/auth.js";
+import { db } from "./_lib/db.js";
+import { posts, projects, sessions } from "./_lib/schema.js";
 
 /** Live system health. Admin-only — counts and latency are not public. */
 export default async function handler(req: VercelRequest, res: VercelResponse) {

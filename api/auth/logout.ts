@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { adminDeploymentOnly } from "../_lib/target";
-import { destroySession } from "../_lib/auth";
-import { db } from "../_lib/db";
+import { adminDeploymentOnly } from "../_lib/target.js";
+import { destroySession } from "../_lib/auth.js";
+import { db } from "../_lib/db.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!adminDeploymentOnly(res)) return;

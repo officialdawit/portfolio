@@ -1,4 +1,4 @@
-import type { posts, projects } from "./schema";
+import type { posts, projects } from "./schema.js";
 
 type ProjectInsert = typeof projects.$inferInsert;
 type PostInsert = typeof posts.$inferInsert;

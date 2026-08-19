@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { asc, eq } from "drizzle-orm";
-import { db } from "../api/_lib/db";
-import { posts, projects } from "../api/_lib/schema";
+import { db } from "./_lib/db.js";
+import { posts, projects } from "./_lib/schema.js";
 
 /** Public read. Returns 204 when unconfigured so the client keeps its seed data. */
 export default async function handler(_req: VercelRequest, res: VercelResponse) {

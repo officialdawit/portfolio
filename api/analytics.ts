@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { adminDeploymentOnly } from "./_lib/target";
-import { currentAdmin } from "./_lib/auth";
-import { db } from "./_lib/db";
+import { adminDeploymentOnly } from "./_lib/target.js";
+import { currentAdmin } from "./_lib/auth.js";
+import { db } from "./_lib/db.js";
 
 const BASE = "https://api.vercel.com/v1/query/web-analytics";
 

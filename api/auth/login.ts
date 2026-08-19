@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { adminDeploymentOnly } from "../_lib/target";
+import { adminDeploymentOnly } from "../_lib/target.js";
 import { eq } from "drizzle-orm";
-import { createSession, rateLimit, verifyPassword } from "../_lib/auth";
-import { db } from "../_lib/db";
-import { admins } from "../_lib/schema";
+import { createSession, rateLimit, verifyPassword } from "../_lib/auth.js";
+import { db } from "../_lib/db.js";
+import { admins } from "../_lib/schema.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!adminDeploymentOnly(res)) return;
