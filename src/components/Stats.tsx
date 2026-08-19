@@ -5,6 +5,8 @@ const STATS = [
   { value: "2", unit: "languages", caption: "Every attendee surface, EN + አማ" },
 ];
 
+import { CountUp } from "./CountUp";
+
 export function Stats() {
   return (
     <section aria-label="By the numbers" className="border-b border-line-soft">
@@ -18,7 +20,7 @@ export function Stats() {
           >
             <p className="flex items-baseline gap-1.5">
               <span className="text-[30px] font-medium leading-none tracking-[-0.02em] sm:text-[38px]">
-                {s.value}
+                <CountUp value={s.value} />
               </span>
               <span className="label label-fg">{s.unit}</span>
             </p>

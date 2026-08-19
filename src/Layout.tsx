@@ -1,7 +1,9 @@
 import { Analytics } from "@vercel/analytics/react";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { Footer } from "./components/Footer";
+import { BackToTop } from "./components/BackToTop";
 import { MobileDock } from "./components/MobileDock";
+import { ScrollProgress } from "./components/ScrollProgress";
 import { Nav } from "./components/Nav";
 import { Shell } from "./components/Shell";
 
@@ -15,11 +17,15 @@ export function Layout() {
         Skip to content
       </a>
       <Nav />
-      <main id="main" className="pb-[72px] sm:pb-0">
+      <ScrollProgress />
+      <main id="main">
         <Outlet />
       </main>
-      <Footer />
+      <div className="pb-[92px] sm:pb-0">
+        <Footer />
+      </div>
       <MobileDock />
+      <BackToTop />
       <ScrollRestoration />
       <Analytics />
     </Shell>

@@ -13,7 +13,7 @@ export function StackTicker() {
         </div>
 
         <div className="relative overflow-hidden py-3">
-          <div className="flex w-max animate-ticker">
+          <div className="flex w-max animate-ticker [animation-play-state:running] hover:[animation-play-state:paused]">
             {[0, 1].map((pass) => (
               <ul key={pass} aria-hidden={pass === 1} className="flex shrink-0">
                 {STACK.map((tech) => (

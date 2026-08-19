@@ -83,7 +83,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <span className="label">
-            Built from scratch — React 19, Vite, Tailwind v4. No template, no UI kit.
+            Designed and built by hand. No template.
           </span>
           <Link
             to="/"

@@ -9,45 +9,49 @@ const ITEMS = [
   { to: "/uses", text: "Uses", Icon: Wrench, end: false },
 ];
 
-/** Fixed bottom navigation on small screens. Hidden from tablet up. */
+/** Floating dock, sized to its contents. Hidden from tablet up. */
 export function MobileDock() {
   return (
-    <nav
-      aria-label="Mobile"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-bg/95 backdrop-blur-md sm:hidden"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    <div
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 sm:hidden"
+      style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
     >
-      <ul className="grid grid-cols-5">
-        {ITEMS.map((item) => (
-          <li key={item.to} className="flex">
-            <NavLink
-              to={item.to}
-              end={item.end}
-              className={({ isActive }) =>
-                `group flex min-h-[56px] w-full flex-col items-center justify-center gap-1.5 transition-colors duration-150 ${
-                  isActive ? "text-fg" : "text-dim"
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  <span
-                    aria-hidden
-                    className={`flex h-7 w-7 items-center justify-center border transition-colors duration-150 ${
-                      isActive
-                        ? "border-fg bg-fg text-bg"
-                        : "border-line bg-raised text-muted"
-                    }`}
-                  >
-                    <item.Icon size={13} strokeWidth={1.5} />
-                  </span>
-                  <span className="label text-[9px] leading-none">{item.text}</span>
-                </>
-              )}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-    </nav>
+      <nav
+        aria-label="Mobile"
+        className="pointer-events-auto border border-line bg-bg/92 shadow-[0_8px_28px_rgba(0,0,0,0.55)] backdrop-blur-md"
+      >
+        <ul className="flex items-stretch">
+          {ITEMS.map((item, i) => (
+            <li key={item.to} className={i > 0 ? "border-l border-line-soft" : ""}>
+              <NavLink
+                to={item.to}
+                end={item.end}
+                className="flex h-14 w-[58px] flex-col items-center justify-center gap-1"
+              >
+                {({ isActive }) => (
+                  <>
+                    <span
+                      aria-hidden
+                      className={`flex h-6 w-6 items-center justify-center transition-colors duration-150 ${
+                        isActive ? "bg-fg text-bg" : "text-muted"
+                      }`}
+                    >
+                      <item.Icon size={13} strokeWidth={1.5} />
+                    </span>
+                    <span
+                      className={`font-mono text-[8px] uppercase leading-none tracking-[0.06em] transition-colors duration-150 ${
+                        isActive ? "text-fg" : "text-dim"
+                      }`}
+                    >
+                      {item.text}
+                    </span>
+                  </>
+                )}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }

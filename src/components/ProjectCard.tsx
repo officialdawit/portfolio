@@ -1,6 +1,18 @@
-import { ArrowUpRight, Check } from "lucide-react";
+import {
+  ArrowUpRight, CalendarClock, Check, CreditCard, Gauge, Store, Ticket, Trophy,
+  type LucideIcon,
+} from "lucide-react";
 import type { Project } from "../data/projects";
 import { DETAILS } from "../data/details";
+
+const KIND_ICON: Record<string, LucideIcon> = {
+  reputrack: CreditCard,
+  lineup: Ticket,
+  vigil: Gauge,
+  "ph-performance": Trophy,
+  gebeta: Store,
+  meskot: CalendarClock,
+};
 
 const STATUS_TEXT: Record<Project["status"], string> = {
   live: "Live",
@@ -11,10 +23,17 @@ const STATUS_TEXT: Record<Project["status"], string> = {
 export function ProjectCard({ project }: { project: Project }) {
   const { index, kind, name, headline, summary, stack, url, status } = project;
   const outcomes = DETAILS[project.slug]?.outcome ?? [];
+  const Icon = KIND_ICON[project.slug] ?? Check;
 
   return (
-    <article className="flex flex-col border-b border-line-soft px-4 py-8 sm:px-6 sm:py-10 lg:[&:nth-child(odd)]:border-r">
+    <article className="group/card flex flex-col border-b border-line-soft px-4 py-8 transition-colors duration-200 hover:bg-raised/40 sm:px-6 sm:py-10 lg:[&:nth-child(odd)]:border-r">
       <div className="flex items-center gap-3">
+        <span
+          aria-hidden
+          className="flex h-8 w-8 shrink-0 items-center justify-center border border-line bg-raised text-fg transition-colors duration-200 group-hover/card:border-strong group-hover/card:bg-fg group-hover/card:text-bg"
+        >
+          <Icon size={15} strokeWidth={1.5} />
+        </span>
         <span className="label label-fg">{index}</span>
         <span aria-hidden className="label text-dim">
           /
