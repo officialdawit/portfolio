@@ -1,6 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
 import { HeroCanvas } from "./HeroCanvas";
-import { Terminal } from "./Terminal";
 
 
 export function Hero() {
@@ -50,10 +49,6 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-12 max-w-xl">
-            <p className="label mb-3">Start from my stack</p>
-            <Terminal />
-          </div>
         </div>
 
         <aside className="relative min-h-[220px] border-t border-line-soft lg:border-l lg:border-t-0">
