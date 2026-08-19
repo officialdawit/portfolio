@@ -37,7 +37,7 @@ export function ProjectsAdmin() {
       title="Projects"
       action={
         <Link
-          to="/admin/projects/new"
+          to="/projects/new"
           className="label label-fg inline-flex items-center gap-2 border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:bg-raised"
         >
           <Plus size={12} strokeWidth={1.75} aria-hidden />
@@ -57,7 +57,7 @@ export function ProjectsAdmin() {
               body="Add your first project and it will appear on the public site immediately."
               action={
                 <Link
-                  to="/admin/projects/new"
+                  to="/projects/new"
                   className="label label-fg border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:bg-raised"
                 >
                   New project

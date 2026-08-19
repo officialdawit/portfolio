@@ -65,7 +65,7 @@ export function PostEdit() {
       setIssues(result.issues ?? []);
       return;
     }
-    navigate("/admin/posts");
+    navigate("/posts");
   };
 
   return (
@@ -145,7 +145,7 @@ export function PostEdit() {
                   {saving ? <Loader2 size={12} strokeWidth={1.75} aria-hidden className="animate-spin" /> : <Save size={12} strokeWidth={1.75} aria-hidden />}
                   {saving ? "Saving" : "Save"}
                 </button>
-                <button type="button" onClick={() => navigate("/admin/posts")} className="label inline-flex min-h-11 items-center border border-line px-4 transition-colors duration-150 hover:border-strong hover:text-fg">
+                <button type="button" onClick={() => navigate("/posts")} className="label inline-flex min-h-11 items-center border border-line px-4 transition-colors duration-150 hover:border-strong hover:text-fg">
                   Cancel
                 </button>
               </div>

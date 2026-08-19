@@ -54,7 +54,7 @@ export function ProjectEdit() {
       setIssues(result.issues ?? []);
       return;
     }
-    navigate("/admin/projects");
+    navigate("/projects");
   };
 
   return (
@@ -155,7 +155,7 @@ export function ProjectEdit() {
                   {saving ? <Loader2 size={12} strokeWidth={1.75} aria-hidden className="animate-spin" /> : <Save size={12} strokeWidth={1.75} aria-hidden />}
                   {saving ? "Saving" : "Save"}
                 </button>
-                <button type="button" onClick={() => navigate("/admin/projects")} className="label inline-flex min-h-11 items-center border border-line px-4 transition-colors duration-150 hover:border-strong hover:text-fg">
+                <button type="button" onClick={() => navigate("/projects")} className="label inline-flex min-h-11 items-center border border-line px-4 transition-colors duration-150 hover:border-strong hover:text-fg">
                   Cancel
                 </button>
               </div>

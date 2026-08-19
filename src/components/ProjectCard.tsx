@@ -1,6 +1,6 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import type { Project } from "../data/projects";
-import { Code } from "./Code";
+import { DETAILS } from "../data/details";
 
 const STATUS_TEXT: Record<Project["status"], string> = {
   live: "Live",
@@ -9,8 +9,8 @@ const STATUS_TEXT: Record<Project["status"], string> = {
 };
 
 export function ProjectCard({ project }: { project: Project }) {
-  const { index, kind, name, headline, summary, stack, url, status, sample } =
-    project;
+  const { index, kind, name, headline, summary, stack, url, status } = project;
+  const outcomes = DETAILS[project.slug]?.outcome ?? [];
 
   return (
     <article className="flex flex-col border-b border-line-soft px-4 py-8 sm:px-6 sm:py-10 lg:[&:nth-child(odd)]:border-r">
@@ -43,15 +43,25 @@ export function ProjectCard({ project }: { project: Project }) {
         {summary}
       </p>
 
-      {/* the technical proof — this is what carries the card */}
-      <div className="mt-7">
-        <Code
-          caption={sample.caption}
-          meta={sample.meta}
-          lang={sample.lang}
-          code={sample.code}
-        />
-      </div>
+      {/* plain-language outcomes — the code lives on the project page, not here */}
+      {outcomes.length > 0 ? (
+        <ul className="mt-7 border border-line bg-card">
+          {outcomes.map((line) => (
+            <li
+              key={line}
+              className="flex items-start gap-3 border-b border-line-soft px-4 py-3 last:border-b-0"
+            >
+              <Check
+                size={13}
+                strokeWidth={1.75}
+                aria-hidden
+                className="mt-0.5 shrink-0 text-fg"
+              />
+              <span className="text-[14px] leading-relaxed text-muted">{line}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
 
       <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
         {stack.map((tech) => (

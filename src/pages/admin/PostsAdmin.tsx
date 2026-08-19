@@ -37,7 +37,7 @@ export function PostsAdmin() {
       title="Posts"
       action={
         <Link
-          to="/admin/posts/new"
+          to="/posts/new"
           className="label label-fg inline-flex items-center gap-2 border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:bg-raised"
         >
           <Plus size={12} strokeWidth={1.75} aria-hidden />
@@ -57,7 +57,7 @@ export function PostsAdmin() {
               body="Drafts stay private until you tick published."
               action={
                 <Link
-                  to="/admin/posts/new"
+                  to="/posts/new"
                   className="label label-fg border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:bg-raised"
                 >
                   New post

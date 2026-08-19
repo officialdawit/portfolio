@@ -14,6 +14,6 @@ export function RequireAuth() {
   }, []);
 
   if (state === "checking") return <Loading text="Checking session" />;
-  if (state === "out") return <Navigate to="/admin/login" replace />;
+  if (state === "out") return <Navigate to="/login" replace />;
   return <Outlet />;
 }

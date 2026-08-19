@@ -24,7 +24,7 @@ export function AdminLogin() {
       setError(readError(result.error));
       return;
     }
-    navigate("/admin");
+    navigate("/");
   };
 
   return (

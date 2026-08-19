@@ -4,10 +4,10 @@ import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { api } from "../../lib/adminApi";
 
 const LINKS = [
-  { to: "/admin", text: "Overview", Icon: LayoutDashboard, end: true },
-  { to: "/admin/projects", text: "Projects", Icon: Database, end: false },
-  { to: "/admin/posts", text: "Posts", Icon: PenLine, end: false },
-  { to: "/admin/analytics", text: "Analytics", Icon: BarChart3, end: false },
+  { to: "/", text: "Overview", Icon: LayoutDashboard, end: true },
+  { to: "/projects", text: "Projects", Icon: Database, end: false },
+  { to: "/posts", text: "Posts", Icon: PenLine, end: false },
+  { to: "/analytics", text: "Analytics", Icon: BarChart3, end: false },
 ];
 
 /**
@@ -24,7 +24,7 @@ export function AdminLayout() {
 
   const handleLogout = async () => {
     await api.logout();
-    navigate("/admin/login");
+    navigate("/login");
   };
 
   return (
