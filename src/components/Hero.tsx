@@ -18,14 +18,14 @@ export function Hero() {
           </div>
 
           <h1 className="mt-8 max-w-3xl text-[34px] font-medium leading-[1.08] tracking-[-0.02em] sm:text-[52px]">
-            I design and ship production SaaS end to end.
+            I build apps and web products, start to finish.
           </h1>
 
           <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-muted">
-            Full-stack product engineer. Schema through to the pixel — typed
-            APIs, Postgres, Stripe billing, and interfaces that hold up on a
-            phone in Addis and a laptop in New York. Six shipped products, one
-            of them serving ten thousand people.
+            Mobile developer, web developer and system architect. I take a
+            product from the first sketch to the thing people use every day —
+            iOS apps, web platforms and the systems behind them. Six shipped
+            products, one of them serving ten thousand people.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">

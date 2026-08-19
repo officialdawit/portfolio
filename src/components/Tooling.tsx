@@ -1,4 +1,5 @@
 import {
+  Apple,
   Boxes,
   Braces,
   Cloud,
@@ -21,6 +22,9 @@ import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
 
 const TOOLS = [
+  { name: "Swift", role: "iOS", Icon: Apple },
+  { name: "Go", role: "Services", Icon: Server },
+  { name: "Rust", role: "Systems", Icon: Braces },
   { name: "SvelteKit 5", role: "App framework", Icon: PanelsTopLeft },
   { name: "Next.js 16", role: "App framework", Icon: PanelsTopLeft },
   { name: "TypeScript", role: "Language", Icon: Braces },

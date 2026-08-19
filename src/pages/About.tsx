@@ -22,12 +22,12 @@ export function About() {
       <PageHead
         index="A"
         eyebrow="About"
-        title="I build the whole thing — schema to pixel."
-        standfirst="Full-stack product engineer in Addis Ababa. I work solo on most of what I ship, which means the database design and the button states are the same person's problem."
+        title="I build the whole thing — app, web and everything under it."
+        standfirst="Mobile developer, web developer and system architect in Addis Ababa. I work solo on most of what I ship, so the database design and the button states are the same person's problem."
         Icon={User}
         meta={[
           { k: "Based", v: "Addis Ababa, Ethiopia" },
-          { k: "Working", v: "Solo + contract" },
+          { k: "Building", v: "Mobile · Web · Systems" },
           { k: "Languages", v: "English, አማርኛ" },
         ]}
       />

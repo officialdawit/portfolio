@@ -1,9 +1,9 @@
 import {
   CreditCard,
   Database,
-  Gauge,
   Globe,
   Layers,
+  Smartphone,
   ShieldCheck,
 } from "lucide-react";
 import { IconCell } from "./IconCell";
@@ -13,39 +13,39 @@ import { SectionHead } from "./SectionHead";
 const CAPABILITIES = [
   {
     index: "04.1",
+    Icon: Smartphone,
+    title: "Mobile apps",
+    body: "iOS and cross-platform apps that feel native — real gestures, sensible offline behaviour, and testing on mid-range Android as well as a new iPhone.",
+  },
+  {
+    index: "04.2",
     Icon: Database,
     title: "Schema and data layer",
     body: "Postgres modelled properly the first time. Drizzle for typed access, migrations that roll back, indexes before the query gets slow.",
   },
   {
-    index: "04.2",
+    index: "04.3",
     Icon: ShieldCheck,
     title: "Auth and access control",
     body: "Sessions, OAuth, and ownership checks on every route. Client-sent IDs are never trusted. Rate limits on anything a stranger can reach.",
   },
   {
-    index: "04.3",
+    index: "04.4",
     Icon: CreditCard,
     title: "Billing that reconciles",
     body: "Stripe subscriptions with idempotent webhooks and a local source of truth, so entitlement never depends on a webhook arriving.",
   },
   {
-    index: "04.4",
+    index: "04.5",
     Icon: Layers,
     title: "Interface and design system",
     body: "Tokens first, components second. Every surface handles loading, empty, error, denied and success before it ships.",
   },
   {
-    index: "04.5",
+    index: "04.6",
     Icon: Globe,
     title: "Bilingual and local-first",
     body: "English and አማርኛ across attendee surfaces, Ethiopian calendar and Ge'ez numerals where the context calls for it.",
-  },
-  {
-    index: "04.6",
-    Icon: Gauge,
-    title: "Performance on real devices",
-    body: "Mid-range Android on metered data is the target, not a 16-inch laptop on fibre. Budget the bundle, not just the design.",
   },
 ];
 
