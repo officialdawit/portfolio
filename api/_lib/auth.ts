@@ -13,7 +13,7 @@ const enc = new TextEncoder();
 const hex = (b: ArrayBuffer) =>
   [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
 
-async function pbkdf2(password: string, salt: Uint8Array) {
+async function pbkdf2(password: string, salt: Uint8Array<ArrayBuffer>) {
   const key = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, [
     "deriveBits",
   ]);
@@ -25,7 +25,7 @@ async function pbkdf2(password: string, salt: Uint8Array) {
 }
 
 export async function hashPassword(password: string) {
-  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const salt = crypto.getRandomValues(new Uint8Array(16)) as Uint8Array<ArrayBuffer>;
   const bits = await pbkdf2(password, salt);
   return `pbkdf2$${ITERATIONS}$${hex(salt.buffer)}$${hex(bits)}`;
 }
@@ -43,7 +43,7 @@ export async function verifyPassword(password: string, stored: string) {
   if (scheme !== "pbkdf2" || !saltHex || !expected) return false;
   const salt = new Uint8Array(
     (saltHex.match(/.{2}/g) ?? []).map((h) => Number.parseInt(h, 16)),
-  );
+  ) as Uint8Array<ArrayBuffer>;
   const key = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, [
     "deriveBits",
   ]);

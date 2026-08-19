@@ -1,3 +1,8 @@
+import type { posts, projects } from "./schema";
+
+type ProjectInsert = typeof projects.$inferInsert;
+type PostInsert = typeof posts.$inferInsert;
+
 type Result<T> = { ok: true; value: T } | { ok: false; issues: string[] };
 
 const str = (v: unknown) => (typeof v === "string" ? v.trim() : "");
@@ -7,7 +12,7 @@ const LANGS = new Set(["ts", "bash", "sql"]);
 const STATUSES = new Set(["live", "in build", "private"]);
 
 /** Boundary validation. Nothing reaches the database without passing through here. */
-export function parseProject(body: unknown): Result<Record<string, unknown>> {
+export function parseProject(body: unknown): Result<ProjectInsert> {
   const b = (body ?? {}) as Record<string, unknown>;
   const issues: string[] = [];
 
@@ -56,17 +61,18 @@ export function parseProject(body: unknown): Result<Record<string, unknown>> {
   return {
     ok: true,
     value: {
-      slug, name, headline, summary, index, kind, status, sample,
+      slug, name, headline, summary, index, kind, sample,
+      status: status as ProjectInsert["status"],
       url: url || null,
       stack,
       position: Number.isFinite(Number(b.position)) ? Number(b.position) : 0,
       published: b.published !== false,
-      detail: (b.detail ?? null) as Record<string, unknown> | null,
+      detail: (b.detail ?? null) as ProjectInsert["detail"],
     },
   };
 }
 
-export function parsePost(body: unknown): Result<Record<string, unknown>> {
+export function parsePost(body: unknown): Result<PostInsert> {
   const b = (body ?? {}) as Record<string, unknown>;
   const issues: string[] = [];
 
@@ -104,7 +110,8 @@ export function parsePost(body: unknown): Result<Record<string, unknown>> {
   return {
     ok: true,
     value: {
-      slug, title, standfirst, date, reading, index, tags, blocks,
+      slug, title, standfirst, date, reading, index, tags,
+      blocks: blocks as PostInsert["blocks"],
       position: Number.isFinite(Number(b.position)) ? Number(b.position) : 0,
       published: b.published === true,
     },

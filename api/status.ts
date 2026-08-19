@@ -11,6 +11,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!db) return res.status(503).json({ error: "database_not_configured" });
   if (!(await currentAdmin(req))) return res.status(401).json({ error: "unauthorized" });
 
+  const conn = db; // narrowed once; closures below cannot see the guard above
+
   const checks: Array<{ name: string; ok: boolean; detail: string; ms: number }> = [];
 
   const timed = async (name: string, fn: () => Promise<string>) => {
@@ -24,22 +26,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   };
 
   await timed("Database", async () => {
-    await db.execute(sql`select 1`);
+    await conn.execute(sql`select 1`);
     return "connected";
   });
 
   await timed("Projects table", async () => {
-    const [r] = await db.select({ n: sql<number>`count(*)::int` }).from(projects);
+    const [r] = await conn.select({ n: sql<number>`count(*)::int` }).from(projects);
     return `${r?.n ?? 0} rows`;
   });
 
   await timed("Posts table", async () => {
-    const [r] = await db.select({ n: sql<number>`count(*)::int` }).from(posts);
+    const [r] = await conn.select({ n: sql<number>`count(*)::int` }).from(posts);
     return `${r?.n ?? 0} rows`;
   });
 
   await timed("Active sessions", async () => {
-    const [r] = await db
+    const [r] = await conn
       .select({ n: sql<number>`count(*)::int` })
       .from(sessions)
       .where(sql`${sessions.expiresAt} > now()`);
@@ -60,7 +62,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
     .from(posts);
 
-  const byMonth = await db.execute(sql`
+  const byMonth = await conn.execute(sql`
     select to_char(date_trunc('month', date::date), 'YYYY-MM') as month,
            count(*)::int as n
     from ${posts}

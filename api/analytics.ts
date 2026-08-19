@@ -59,7 +59,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       fetchOne(query("deviceType", 4)),
     ]);
 
-    const totals = (daily.data ?? []).reduce(
+    const totals = (daily.data ?? []).reduce<{ pageviews: number; visitors: number }>(
       (acc, row) => ({
         pageviews: acc.pageviews + Number(row.pageviews ?? 0),
         visitors: acc.visitors + Number(row.visitors ?? 0),
