@@ -1,0 +1,95 @@
+import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { currentAdmin } from "./_lib/auth";
+import { db } from "./_lib/db";
+
+const BASE = "https://api.vercel.com/v1/query/web-analytics";
+
+type Aggregate = { data?: Array<Record<string, unknown>> };
+
+/**
+ * Admin-only proxy for Vercel Web Analytics.
+ * The token is read server-side and never reaches the client bundle.
+ */
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!db) return res.status(503).json({ error: "database_not_configured" });
+  if (!(await currentAdmin(req))) return res.status(401).json({ error: "unauthorized" });
+
+  const token = process.env.VERCEL_TOKEN;
+  const projectId = process.env.VERCEL_PROJECT_ID;
+  const teamId = process.env.VERCEL_TEAM_ID;
+
+  if (!token || !projectId) {
+    return res.status(200).json({
+      configured: false,
+      reason: "Set VERCEL_TOKEN and VERCEL_PROJECT_ID to enable analytics.",
+    });
+  }
+
+  const days = Math.min(90, Math.max(1, Number(req.query.days ?? 30)));
+  const until = new Date();
+  const since = new Date(until.getTime() - days * 86_400_000);
+  const iso = (d: Date) => d.toISOString().slice(0, 10);
+
+  const query = (by: string, limit?: number) => {
+    const params = new URLSearchParams({
+      projectId,
+      since: iso(since),
+      until: iso(until),
+      by,
+    });
+    if (teamId) params.set("teamId", teamId);
+    if (limit) params.set("limit", String(limit));
+    return `${BASE}/visits/aggregate?${params.toString()}`;
+  };
+
+  const fetchOne = async (url: string): Promise<Aggregate> => {
+    const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    if (!r.ok) throw new Error(String(r.status));
+    return (await r.json()) as Aggregate;
+  };
+
+  try {
+    const [daily, routes, countries, referrers, devices] = await Promise.all([
+      fetchOne(query("day")),
+      fetchOne(query("route", 8)),
+      fetchOne(query("country", 6)),
+      fetchOne(query("referrerHostname", 6)),
+      fetchOne(query("deviceType", 4)),
+    ]);
+
+    const totals = (daily.data ?? []).reduce(
+      (acc, row) => ({
+        pageviews: acc.pageviews + Number(row.pageviews ?? 0),
+        visitors: acc.visitors + Number(row.visitors ?? 0),
+      }),
+      { pageviews: 0, visitors: 0 },
+    );
+
+    res.setHeader("Cache-Control", "private, max-age=300");
+    return res.status(200).json({
+      configured: true,
+      range: { since: iso(since), until: iso(until), days },
+      totals,
+      daily: daily.data ?? [],
+      routes: routes.data ?? [],
+      countries: countries.data ?? [],
+      referrers: referrers.data ?? [],
+      devices: devices.data ?? [],
+    });
+  } catch (error) {
+    const status = String(error instanceof Error ? error.message : "");
+    if (status === "403" || status === "401") {
+      return res.status(200).json({
+        configured: false,
+        reason: "Vercel rejected the token. Check VERCEL_TOKEN scope and team access.",
+      });
+    }
+    if (status === "404") {
+      return res.status(200).json({
+        configured: false,
+        reason: "Project not found, or Web Analytics is not enabled for it yet.",
+      });
+    }
+    return res.status(502).json({ error: "analytics_upstream_failed" });
+  }
+}

@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #000000;
+  --color-fg: #fafaf9;
+  --color-muted: #8c8c8c;
+  --color-dim: #5c5c5c;
+  --color-card: #0a0a0a;
+  --color-raised: #101010;
+  --color-line: rgba(255, 255, 255, 0.12);
+  --color-line-soft: rgba(255, 255, 255, 0.08);
+  --color-rule: rgba(255, 255, 255, 0.17);
+  --color-strong: rgba(255, 255, 255, 0.32);
+
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius: 0px;
+  --nav-h: 44px;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+    border-radius: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--nav-h);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-fg);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-strong);
+  }
+}
+
+@layer components {
+  /* mono uppercase micro-label — the load-bearing type role of this system */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .label-fg {
+    color: var(--color-fg);
+  }
+
+  /* full-bleed hairline divider */
+  .rule {
+    border-top: 1px solid var(--color-line-soft);
+  }
+
+  /* the vertical rail container every section sits inside */
+  .rail {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    border-inline: 1px solid var(--color-line-soft);
+  }
+
+  /* code blocks scroll inside their own frame — keep the affordance quiet */
+  .code-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) transparent;
+  }
+  .code-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .code-scroll::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+  }
+  .code-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--color-strong);
+  }
+}
+
+@layer components {
+  /* diagonal hatch — used on the page gutters outside the rail */
+  .hatch {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.055) 0px,
+      rgba(255, 255, 255, 0.055) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  }
+
+  /* dashed outline used to frame a hero statement */
+  .dashed-frame {
+    border: 1px dashed var(--color-line);
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 42s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-ticker {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
