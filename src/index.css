@@ -16,8 +16,8 @@
   --color-accent: #c8825a;
   --color-accent-soft: rgba(200, 130, 90, 0.16);
 
-  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "Archivo", "Noto Sans Ethiopic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "Noto Sans Ethiopic", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --radius: 6px;
   --nav-h: 56px;

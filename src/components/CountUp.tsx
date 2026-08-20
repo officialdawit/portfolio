@@ -34,5 +34,10 @@ export function CountUp({ value, duration = 900 }: { value: string; duration?: n
     return () => cancelAnimationFrame(frame);
   }, [shown, value, duration]);
 
-  return <span ref={ref}>{display}</span>;
+  // proportional digits change width as they animate and shove the layout around
+  return (
+    <span ref={ref} className="[font-variant-numeric:tabular-nums]">
+      {display}
+    </span>
+  );
 }
