@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import type { Project } from "../data/projects";
 import { DETAILS } from "../data/details";
+import { ProjectVisual } from "./ProjectVisual";
 
 const KIND_ICON: Record<string, LucideIcon> = {
   reputrack: CreditCard,
@@ -21,12 +22,16 @@ const STATUS_TEXT: Record<Project["status"], string> = {
 };
 
 export function ProjectCard({ project }: { project: Project }) {
-  const { kind, name, headline, summary, stack, url, status } = project;
+  const { kind, name, headline, summary, stack, url, status, image } = project;
   const outcomes = DETAILS[project.slug]?.outcome ?? [];
   const Icon = KIND_ICON[project.slug] ?? Check;
 
   return (
     <article className="group/card flex flex-col border-b border-line-soft px-4 py-8 transition-colors duration-200 hover:bg-raised/40 sm:px-6 sm:py-10 lg:[&:nth-child(odd)]:border-r">
+      <div className="mb-6">
+        <ProjectVisual name={name} kind={kind} image={image} Icon={Icon} />
+      </div>
+
       <div className="flex items-center gap-3">
         <span
           aria-hidden

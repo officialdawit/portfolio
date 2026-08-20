@@ -84,3 +84,19 @@ export const posts = pgTable(
   },
   (t) => [uniqueIndex("posts_slug_idx").on(t.slug)],
 );
+
+export const enquiries = pgTable(
+  "enquiries",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    name: text("name").notNull(),
+    email: text("email").notNull(),
+    about: text("about").notNull(),
+    who: text("who"),
+    timing: text("timing").notNull().default("not sure"),
+    read: boolean("read").notNull().default(false),
+    ipHash: text("ip_hash"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [index("enquiries_created_idx").on(t.createdAt)],
+);

@@ -7,6 +7,8 @@ export type Project = {
   summary: string;
   stack: string[];
   url?: string;
+  /** real screenshot; omitted projects fall back to a designed panel */
+  image?: string;
   repo?: string;
   status: "live" | "in build" | "private";
   /** rendered inside the framed module — the technical proof for this project */
@@ -55,6 +57,7 @@ await resend.emails.send({
       "Organizers open a waitlist in under a minute, share one link, and watch signups convert. Fully bilingual — English and አማርኛ — with the Ethiopian calendar where it belongs.",
     stack: ["SvelteKit 5", "Neon Postgres", "Drizzle", "Tailwind v4"],
     url: "https://lineup.dawit.dev",
+    image: "/shots/lineup.webp",
     status: "live",
   sample: {
     caption: "waitlist/+page.server.ts",

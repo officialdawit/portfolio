@@ -1,4 +1,4 @@
-import { BarChart3, Database, ExternalLink, LayoutDashboard, LogOut, PenLine, Terminal } from "lucide-react";
+import { BarChart3, Database, ExternalLink, Inbox, LayoutDashboard, LogOut, PenLine, Terminal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { api } from "../../lib/adminApi";
@@ -8,6 +8,7 @@ const LINKS = [
   { to: "/projects", text: "Projects", Icon: Database, end: false },
   { to: "/posts", text: "Posts", Icon: PenLine, end: false },
   { to: "/analytics", text: "Analytics", Icon: BarChart3, end: false },
+  { to: "/enquiries", text: "Enquiries", Icon: Inbox, end: false },
 ];
 
 /**

@@ -8,6 +8,13 @@
       "when": 1787123437670,
       "tag": "0000_sour_captain_midlands",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1787240764443,
+      "tag": "0001_uneven_pyro",
+      "breakpoints": true
     }
   ]
 }
