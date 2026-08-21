@@ -155,7 +155,16 @@ export function EnquiryForm() {
             {state === "sending" ? "Sending" : "Send it"}
           </button>
         </BorderBeam>
-        <span className="text-[14px] text-muted">Or email me directly — link below.</span>
+        <span className="text-[14px] text-muted">
+          Or{" "}
+          <a
+            href="mailto:officialdawitworku@gmail.com"
+            className="text-fg underline decoration-line underline-offset-4 transition-colors duration-150 hover:decoration-accent"
+          >
+            email me directly
+          </a>
+          .
+        </span>
       </div>
     </form>
   );
