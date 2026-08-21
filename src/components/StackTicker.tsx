@@ -1,4 +1,5 @@
 import { STACK } from "../data/projects";
+import { BrandIcon, hasBrandIcon } from "./BrandIcon";
 import { Marquee } from "./ui/marquee";
 
 export function StackTicker() {
@@ -14,8 +15,14 @@ export function StackTicker() {
         <div className="relative overflow-hidden py-3">
           <Marquee pauseOnHover speed="slow" className="[--gap:2.5rem]">
             {STACK.map((tech) => (
-              <span key={tech} className="label whitespace-nowrap">
-                {tech}
+              <span
+                key={tech}
+                className="flex items-center gap-2 whitespace-nowrap"
+              >
+                {hasBrandIcon(tech) ? (
+                  <BrandIcon name={tech} size={15} />
+                ) : null}
+                <span className="label">{tech}</span>
               </span>
             ))}
           </Marquee>
