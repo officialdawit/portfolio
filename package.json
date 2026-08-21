@@ -14,17 +14,22 @@
     "dev:admin": "VITE_TARGET=admin vite --port 4174"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
     "@neondatabase/serverless": "^1.1.0",
+    "@radix-ui/react-slot": "^1.3.3",
     "@vercel/analytics": "^2.0.1",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.2",
     "lucide-react": "^0.469.0",
     "motion": "^13.1.1",
+    "radix-ui": "^1.6.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.18.2",
     "react-use-measure": "^2.1.7",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "tunnel-rat": "^0.1.2"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
