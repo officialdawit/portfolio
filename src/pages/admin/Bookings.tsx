@@ -5,18 +5,26 @@ import { EmptyState, ErrorState, Loading } from "../../components/admin/States";
 import { readError } from "../../lib/adminApi";
 
 type Booking = {
-  id: number;
+  uid: string;
   title: string;
-  startTime: string;
-  endTime: string;
+  start: string;
+  end: string;
   status?: string;
   attendees?: Array<{ name?: string; email?: string }>;
 };
-type EventType = { id: number; title: string; slug: string; length: number };
+type EventType = {
+  id: number;
+  title: string;
+  slug: string;
+  length: number;
+  hidden: boolean;
+  url: string;
+};
 type Data = {
   configured: boolean;
   reason?: string;
-  user?: { username?: string; email?: string } | null;
+  user?: { username?: string; email?: string; timeZone?: string } | null;
+  bookerUrl?: string;
   bookings?: Booking[];
   eventTypes?: EventType[];
 };
@@ -33,7 +41,7 @@ const when = (iso: string) =>
 export function AdminBookings() {
   const [data, setData] = useState<Data | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [busy, setBusy] = useState<number | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
 
   const load = async () => {
     setError(null);
@@ -52,18 +60,21 @@ export function AdminBookings() {
     void load();
   }, []);
 
-  const cancel = async (id: number, title: string) => {
+  const cancel = async (uid: string, title: string) => {
     if (!window.confirm(`Cancel "${title}"? The attendee is notified by Cal.com.`)) return;
-    setBusy(id);
-    const res = await fetch(`/api/cal?id=${id}`, { method: "DELETE", credentials: "same-origin" });
+    setBusy(uid);
+    const res = await fetch(`/api/cal?cancel=${encodeURIComponent(uid)}`, {
+      method: "POST",
+      credentials: "same-origin",
+    });
     setBusy(null);
     if (res.ok) void load();
     else setError("Couldn't cancel that booking.");
   };
 
   const upcoming = (data?.bookings ?? [])
-    .filter((b) => new Date(b.startTime).getTime() > Date.now())
-    .sort((a, b) => +new Date(a.startTime) - +new Date(b.startTime));
+    .filter((b) => new Date(b.start).getTime() > Date.now())
+    .sort((a, b) => +new Date(a.start) - +new Date(b.start));
 
   return (
     <AdminChrome index="ADMIN" title="Bookings">
@@ -83,7 +94,7 @@ export function AdminBookings() {
               { k: "Upcoming", v: upcoming.length },
               { k: "Total bookings", v: (data.bookings ?? []).length },
               { k: "Event types", v: (data.eventTypes ?? []).length },
-              { k: "Account", v: data.user?.username ?? "—" },
+              { k: "Time zone", v: data.user?.timeZone?.split("/")[1]?.replace("_", " ") ?? "—" },
             ].map((s) => (
               <div key={s.k} className="border-b border-r border-line-soft px-4 py-6 sm:px-6">
                 <p className="truncate text-[24px] font-semibold leading-none tracking-[-0.02em]">
@@ -106,7 +117,7 @@ export function AdminBookings() {
             ) : (
               upcoming.map((b) => (
                 <div
-                  key={b.id}
+                  key={b.uid}
                   className="flex flex-wrap items-center gap-4 border-b border-line-soft px-4 py-4 last:border-b-0 sm:px-6"
                 >
                   <span className="flex min-w-0 flex-col">
@@ -116,11 +127,11 @@ export function AdminBookings() {
                       {b.attendees?.[0]?.email ? ` · ${b.attendees[0].email}` : ""}
                     </span>
                   </span>
-                  <span className="label ml-auto whitespace-nowrap">{when(b.startTime)}</span>
+                  <span className="label ml-auto whitespace-nowrap">{when(b.start)}</span>
                   <button
                     type="button"
-                    onClick={() => cancel(b.id, b.title)}
-                    disabled={busy === b.id}
+                    onClick={() => cancel(b.uid, b.title)}
+                    disabled={busy === b.uid}
                     className="label inline-flex items-center gap-2 rounded-[var(--radius)] border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:text-fg disabled:opacity-50"
                   >
                     <X size={11} strokeWidth={1.75} aria-hidden />
@@ -151,7 +162,17 @@ export function AdminBookings() {
               >
                 <span className="text-[15px] font-medium text-fg">{e.title}</span>
                 <span className="label text-dim">/{e.slug}</span>
+                {e.hidden ? <span className="label text-dim">hidden</span> : null}
                 <span className="label ml-auto">{e.length} min</span>
+                <a
+                  href={e.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="label inline-flex items-center gap-2 transition-colors duration-150 hover:text-fg"
+                >
+                  Open
+                  <ExternalLink size={11} strokeWidth={1.6} aria-hidden />
+                </a>
               </div>
             ))}
           </section>

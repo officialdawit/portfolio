@@ -13,8 +13,11 @@ const LINKS = [
 
 const SEEN_KEY = "dw:enquiry-seen-at";
 const DELAY_MS = 5000;
-/** Ask again after this long. Set to 0 to ask on every single visit. */
-const COOLDOWN_DAYS = 3;
+/**
+ * Production asks once and never again. Development re-asks after a minute so
+ * the flow stays testable without clearing storage by hand.
+ */
+const COOLDOWN_MS = import.meta.env.PROD ? Number.POSITIVE_INFINITY : 60_000;
 
 export function Nav() {
   const [enquiryOpen, setEnquiryOpen] = useState(false);
@@ -24,8 +27,7 @@ export function Nav() {
     let suppressed = false;
     try {
       const last = Number(localStorage.getItem(SEEN_KEY) ?? 0);
-      const cooldownMs = COOLDOWN_DAYS * 86_400_000;
-      suppressed = cooldownMs > 0 && last > 0 && Date.now() - last < cooldownMs;
+      suppressed = last > 0 && Date.now() - last < COOLDOWN_MS;
     } catch {
       suppressed = false; // private browsing
     }
