@@ -20,7 +20,7 @@ export function WorkDetail() {
     path: `/work/${slug}`,
   });
 
-  if (!project || !detail) return <NotFound />;
+  if (!project) return <NotFound />;
 
   const others = PROJECTS.filter((p) => p.slug !== slug).slice(0, 3);
 
@@ -34,12 +34,14 @@ export function WorkDetail() {
         Icon={Boxes}
         back={{ to: "/work", text: "All work" }}
         meta={[
-          { k: "Role", v: detail.role },
-          { k: "Timeline", v: detail.timeline },
+          { k: "Role", v: detail?.role ?? "Solo \u2014 design, build, deploy" },
+          { k: "Timeline", v: detail?.timeline ?? "Shipped" },
           { k: "Status", v: project.status === "live" ? "Live" : "In build" },
         ]}
       />
 
+      {detail ? (
+        <>
       <section className="border-b border-line-soft">
         <div className="rail">
           <SectionHead index="01" title="The problem" />
@@ -113,6 +115,29 @@ export function WorkDetail() {
           </div>
         </div>
       </section>
+
+        </>
+      ) : (
+        <section className="border-b border-line-soft">
+          <div className="rail py-14 sm:py-20">
+            <p className="max-w-xl text-[17px] leading-relaxed text-muted">
+              A longer write-up of this one is still to come. In the meantime it
+              is live, so the quickest way to judge it is to open it.
+            </p>
+            {project.url ? (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-7 inline-flex items-center gap-2 rounded-[var(--radius)] bg-fg px-5 py-3 text-[15px] font-medium text-bg transition-opacity duration-150 hover:opacity-88"
+              >
+                Open {project.name}
+                <ArrowUpRight size={15} strokeWidth={1.75} aria-hidden />
+              </a>
+            ) : null}
+          </div>
+        </section>
+      )}
 
       <section className="border-b border-line-soft">
         <div className="rail">

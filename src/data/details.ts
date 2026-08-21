@@ -155,47 +155,6 @@ export async function recordResult(monitorId: string, result: CheckResult) {
     },
   },
 
-  "ph-performance": {
-    slug: "ph-performance",
-    year: "2024 — present",
-    role: "Engineer on a live product with real users",
-    timeline: "Ongoing",
-    problem:
-      "A youth football platform with roughly ten thousand users across coaches, athletes and parents, in a monorepo of about 420k lines running on a single Heroku dyno. Every change has to assume the system stays up while it lands.",
-    decisions: [
-      {
-        title: "Additive migrations only",
-        body: "New tables and columns, never a destructive change in the same deploy as the code that needs it. Expand, migrate, contract — with the contract step landing days later once nothing reads the old shape.",
-      },
-      {
-        title: "CREATE INDEX CONCURRENTLY, always",
-        body: "A plain CREATE INDEX takes a lock that blocks writes. On a table this size that is an outage. Concurrently is slower and cannot run in a transaction — that tradeoff is not negotiable here.",
-      },
-      {
-        title: "Read the query plan before shipping the query",
-        body: "One dyno means no headroom to absorb a sequential scan. EXPLAIN ANALYZE is part of writing the query, not part of debugging it later.",
-      },
-    ],
-    outcome: [
-      "No migration-caused downtime",
-      "N+1 queries caught in review rather than in production",
-      "The largest codebase I ship in weekly",
-    ],
-    extra: {
-      caption: "explain output",
-      meta: "psql",
-      lang: "bash",
-      code: `# before: sequential scan on 2.1M rows
-Seq Scan on session_attendance  (cost=0.00..48213.00 rows=1 width=48)
-  Filter: ((session_id = 88421) AND (status = 'present'))
-  Rows Removed by Filter: 2098443
-Execution Time: 812.443 ms
-
-# after: partial index on the hot predicate
-Index Scan using attendance_present_idx  (cost=0.43..8.45 rows=1 width=48)
-Execution Time: 0.119 ms`,
-    },
-  },
 
   gebeta: {
     slug: "gebeta",

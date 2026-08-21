@@ -4,6 +4,7 @@ import { Hero } from "../components/Hero";
 import { BuildChart } from "../components/BuildChart";
 import { Capabilities } from "../components/Capabilities";
 import { Integrations } from "../components/Integrations";
+import { MoreWork } from "../components/MoreWork";
 import { Stats } from "../components/Stats";
 import { Tooling } from "../components/Tooling";
 import { StackTicker } from "../components/StackTicker";
@@ -25,6 +26,7 @@ export function Home() {
         <StackTicker />
         <Stats />
         <Work />
+        <MoreWork />
         <Capabilities />
         <Tooling />
         <Integrations />

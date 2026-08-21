@@ -106,30 +106,29 @@ await resend.emails.send({
   },
   {
     index: "03.4",
-    kind: "Sports platform",
-    slug: "ph-performance",
-    name: "PH Performance",
-    headline: "Ten thousand people depend on this one not falling over",
+    kind: "Wholesale commerce",
+    slug: "suq",
+    name: "Suq",
+    headline: "The B2B storefront your buyers actually want",
     summary:
-      "Youth football coaching platform — sessions, athlete tracking, parent comms, video review. The largest codebase I work in, and the one where every migration gets read twice before it runs.",
-    stack: ["Monorepo", "Node API", "Heroku", "Postgres"],
+      "Wholesale runs on negotiated prices, payment terms and bulk orders \u2014 none of which normal shop checkout handles. Suq gives every buyer their own agreed pricing and a portal that matches how their purchasing already works.",
+    stack: ["SvelteKit 5", "Postgres", "Drizzle", "Stripe"],
+    url: "https://suq.dawit.dev",
+    image: "/shots/suq.webp",
     status: "live",
-  sample: {
-    caption: "0042_session_attendance.sql",
-    meta: "migration",
-    lang: "sql",
-    code: `-- additive only: 10k live users, no lock on sessions
-create table session_attendance (
-  id            bigserial primary key,
-  session_id    bigint not null references sessions(id) on delete cascade,
-  athlete_id    bigint not null references athletes(id) on delete cascade,
-  status        text not null default 'unknown',
-  recorded_at   timestamptz not null default now()
-);
+    sample: {
+      caption: "buyer-pricing.ts",
+      meta: "TS",
+      lang: "ts",
+      code: `// each buyer sees their agreed price, never the list price
+const [tier] = await db
+  .select()
+  .from(priceTiers)
+  .where(and(eq(priceTiers.buyerId, buyer.id), eq(priceTiers.productId, product.id)))
+  .limit(1);
 
-create unique index concurrently session_attendance_unique
-  on session_attendance (session_id, athlete_id);`,
-  },
+return tier?.unitPrice ?? product.listPrice;`,
+    },
   },
   {
     index: "03.5",

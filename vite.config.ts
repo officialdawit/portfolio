@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
   );
 
   return {
+    resolve: { alias: { "@": resolve(process.cwd(), "src") } },
     plugins: [
       {
         // One target's routes are resolved; the other's never enter the graph.

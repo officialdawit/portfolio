@@ -9,9 +9,10 @@ const PASSES = [
   { label: "PALETTE + GRIDS", js: 75.6, css: 5.2 },
   { label: "ROUTES + BLOG", js: 120.3, css: 5.6 },
   { label: "ADMIN + API", js: 126.0, css: 5.8 },
+  { label: "MOTION + SHOTS", js: 168.8, css: 8.3 },
 ];
 
-const MAX = 130;
+const MAX = 180;
 const W = 720;
 const H = 190;
 const PAD = { l: 8, r: 8, t: 16, b: 8 };
@@ -35,8 +36,8 @@ export function BuildChart() {
           <p className="max-w-2xl text-[19px] font-medium leading-snug tracking-[-0.01em] sm:text-[22px]">
             Every feature on this page was measured as it landed.{" "}
             <span className="text-muted">
-              Gzipped transfer size across five build passes, no estimates. The
-            biggest jump is react-router — 43 kB for real routing.
+              Gzipped transfer size across six build passes, no estimates. The
+            two biggest jumps are react-router and Motion, 43 kB each.
             </span>
           </p>
 
@@ -58,9 +59,9 @@ export function BuildChart() {
             viewBox={`0 0 ${W} ${H}`}
             className="h-auto w-full"
             role="img"
-            aria-label="Bundle size across five build passes: 66.2, 69.8, 75.6, 120.3 and 126.0 kB of JavaScript"
+            aria-label="Bundle size across six build passes: 66.2, 69.8, 75.6, 120.3, 126.0 and 168.8 kB of JavaScript"
           >
-            {[0, 32.5, 65, 97.5, 130].map((v) => (
+            {[0, 45, 90, 135, 180].map((v) => (
               <line
                 key={v}
                 x1={PAD.l} x2={W - PAD.r} y1={y(v)} y2={y(v)}
@@ -104,7 +105,7 @@ export function BuildChart() {
           </svg>
         </div>
 
-        <div className="grid grid-cols-2 border-t border-line-soft lg:grid-cols-5">
+        <div className="grid grid-cols-2 border-t border-line-soft lg:grid-cols-6">
           {PASSES.map((p) => (
             <div
               key={p.label}
