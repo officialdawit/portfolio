@@ -34,11 +34,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const since = new Date(until.getTime() - days * 86_400_000);
   const iso = (d: Date) => d.toISOString().slice(0, 10);
 
-  const query = (by: string, limit?: number) => {
+  const prevUntil = new Date(since.getTime() - 86_400_000);
+  const prevSince = new Date(prevUntil.getTime() - days * 86_400_000);
+
+  const query = (by: string, limit?: number, window?: { a: Date; b: Date }) => {
+    const w = window ?? { a: since, b: until };
     const params = new URLSearchParams({
       projectId,
-      since: iso(since),
-      until: iso(until),
+      since: iso(w.a),
+      until: iso(w.b),
       by,
     });
     if (teamId) params.set("teamId", teamId);
@@ -53,32 +57,58 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   };
 
   try {
-    const [daily, routes, countries, referrers, devices] = await Promise.all([
-      fetchOne(query("day")),
-      fetchOne(query("route", 8)),
-      fetchOne(query("country", 6)),
-      fetchOne(query("referrerHostname", 6)),
-      fetchOne(query("deviceType", 4)),
-    ]);
+    // events and utm are 402 on this plan; hour is 400 — deliberately not requested
+    const [daily, paths, countries, referrers, devices, browsers, systems, prevDaily] =
+      await Promise.all([
+        fetchOne(query("day")),
+        fetchOne(query("requestPath", 10)),
+        fetchOne(query("country", 8)),
+        fetchOne(query("referrerHostname", 8)),
+        fetchOne(query("deviceType", 4)),
+        fetchOne(query("browserName", 6)),
+        fetchOne(query("osName", 6)),
+        // optional: the plan's retention window may reject this range
+        fetchOne(query("day", undefined, { a: prevSince, b: prevUntil })).catch(
+          () => ({ data: [] as Array<Record<string, unknown>> }),
+        ),
+      ]);
 
-    const totals = (daily.data ?? []).reduce<{ pageviews: number; visitors: number }>(
-      (acc, row) => ({
-        pageviews: acc.pageviews + Number(row.pageviews ?? 0),
-        visitors: acc.visitors + Number(row.visitors ?? 0),
-      }),
-      { pageviews: 0, visitors: 0 },
-    );
+    const sum = (rows: Array<Record<string, unknown>> | undefined) =>
+      (rows ?? []).reduce<{ pageviews: number; visitors: number }>(
+        (acc, row) => ({
+          pageviews: acc.pageviews + Number(row.pageviews ?? 0),
+          visitors: acc.visitors + Number(row.visitors ?? 0),
+        }),
+        { pageviews: 0, visitors: 0 },
+      );
+
+    const totals = sum(daily.data);
+    const prevRows = prevDaily.data ?? [];
+    const previous = prevRows.length > 0 ? sum(prevRows) : null;
+    const activeDays = (daily.data ?? []).filter((r) => Number(r.pageviews ?? 0) > 0).length;
+    const best = [...(daily.data ?? [])].sort(
+      (a, b) => Number(b.pageviews ?? 0) - Number(a.pageviews ?? 0),
+    )[0];
 
     res.setHeader("Cache-Control", "private, max-age=300");
     return res.status(200).json({
       configured: true,
       range: { since: iso(since), until: iso(until), days },
       totals,
+      previous,
+      comparisonAvailable: prevRows.length > 0,
+      derived: {
+        activeDays,
+        viewsPerVisitor: totals.visitors > 0 ? +(totals.pageviews / totals.visitors).toFixed(1) : 0,
+        bestDay: best ? { date: String(best.timestamp ?? ""), pageviews: Number(best.pageviews ?? 0) } : null,
+      },
       daily: daily.data ?? [],
-      routes: routes.data ?? [],
+      paths: paths.data ?? [],
       countries: countries.data ?? [],
       referrers: referrers.data ?? [],
       devices: devices.data ?? [],
+      browsers: browsers.data ?? [],
+      systems: systems.data ?? [],
     });
   } catch (error) {
     const status = String(error instanceof Error ? error.message : "");
@@ -91,7 +121,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (status === "400") {
       return res.status(200).json({
         configured: false,
-        reason: "Web Analytics is not enabled for that project, or the project id is wrong.",
+        reason:
+          "Vercel rejected the query — usually Web Analytics not enabled on the project, or a date range beyond the plan's retention window.",
       });
     }
     if (status === "404") {
