@@ -142,7 +142,7 @@ const AccordionItem: FC<AccordionItemProps> = ({
         >
           <button
             onClick={() => setOpenId(isOpen ? null : item.id)}
-            className="flex w-full cursor-pointer items-center justify-between px-[12px] py-[10px]"
+            className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4"
           >
             <div className="flex items-center gap-[12px]">
               {item.icon}
@@ -166,7 +166,7 @@ const AccordionItem: FC<AccordionItemProps> = ({
             className="overflow-hidden will-change-transform"
           >
             <div ref={ref}>
-              <div className="px-5 pb-5 text-xs font-medium text-muted md:text-[18px]">
+              <div className="max-w-2xl px-5 pb-5 text-[15px] font-medium leading-relaxed text-muted md:text-[16px]">
                 {item.content}
               </div>
             </div>
@@ -185,8 +185,8 @@ export const AccordionApp: FC<AccordionProps> = ({ items }) => {
   const openIndex = defaultItems.findIndex((item) => item.id === openId);
 
   return (
-    <div className="flex w-full flex-col items-center justify-center p-6 transition-colors duration-500">
-      <ul className="w-xs md:w-sm">
+    <div className="w-full transition-colors duration-500">
+      <ul className="w-full">
         {defaultItems.map((item, index) => (
           <AccordionItem
             key={item.id}
