@@ -23,6 +23,32 @@
   --nav-h: 56px;
 }
 
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 40s) linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
 @layer base {
   * {
     border-color: var(--color-line);
@@ -316,7 +342,9 @@
 @media (prefers-reduced-motion: reduce) {
   .beam-ring,
   .orb-core,
-  .orb-ring {
+  .orb-ring,
+  .animate-marquee,
+  .animate-marquee-vertical {
     animation: none;
   }
   .beam-ring {
