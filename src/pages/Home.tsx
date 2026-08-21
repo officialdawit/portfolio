@@ -9,6 +9,7 @@ import { Stats } from "../components/Stats";
 import { Tooling } from "../components/Tooling";
 import { StackTicker } from "../components/StackTicker";
 import { Work } from "../components/Work";
+import { Working } from "../components/Working";
 import { useMeta } from "../lib/useMeta";
 
 export function Home() {
@@ -32,6 +33,7 @@ export function Home() {
         <Integrations />
         <BuildChart />
         <Approach />
+        <Working />
         <Contact />
       </main>
     </>
