@@ -1,6 +1,6 @@
 import { Boxes, PenLine, User, Wrench } from "lucide-react";
-import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { CommandPalette } from "./CommandPalette";
 import { EnquiryModal } from "./EnquiryModal";
 
@@ -11,22 +11,25 @@ const LINKS = [
   { to: "/uses", text: "Uses", Icon: Wrench },
 ];
 
-const SEEN_KEY = "dw:enquiry-seen";
+const SEEN_KEY = "dw:enquiry-seen-at";
 const DELAY_MS = 5000;
+/** Ask again after this long. Set to 0 to ask on every single visit. */
+const COOLDOWN_DAYS = 3;
 
 export function Nav() {
   const [enquiryOpen, setEnquiryOpen] = useState(false);
 
-  // Opens itself once, five seconds in. Remembered afterwards — a popup that
-  // returns on every visit is the fastest way to make someone leave.
+  // Opens itself once, five seconds in, then waits out the cooldown.
   useEffect(() => {
-    let seen = false;
+    let suppressed = false;
     try {
-      seen = localStorage.getItem(SEEN_KEY) === "1";
+      const last = Number(localStorage.getItem(SEEN_KEY) ?? 0);
+      const cooldownMs = COOLDOWN_DAYS * 86_400_000;
+      suppressed = cooldownMs > 0 && last > 0 && Date.now() - last < cooldownMs;
     } catch {
-      seen = false; // private browsing
+      suppressed = false; // private browsing
     }
-    if (seen) return;
+    if (suppressed) return;
 
     const timer = window.setTimeout(() => setEnquiryOpen(true), DELAY_MS);
     return () => window.clearTimeout(timer);
@@ -35,7 +38,7 @@ export function Nav() {
   const handleClose = () => {
     setEnquiryOpen(false);
     try {
-      localStorage.setItem(SEEN_KEY, "1");
+      localStorage.setItem(SEEN_KEY, String(Date.now()));
     } catch {
       // nothing to do; it will simply ask again next visit
     }
@@ -43,51 +46,50 @@ export function Nav() {
 
   return (
     <>
-    <header className="sticky top-0 z-50 border-b border-line-soft bg-bg/90 backdrop-blur-sm">
-      <nav
-        aria-label="Primary"
-        className="rail flex h-[var(--nav-h)] items-stretch justify-between pl-4 sm:pl-6"
-      >
-        <NavLink
-          to="/"
-          className="label label-fg flex items-center whitespace-nowrap tracking-[0.14em] transition-colors duration-150 hover:text-muted"
+      <header className="sticky top-0 z-50 border-b border-line-soft bg-bg/85 backdrop-blur-md">
+        <nav
+          aria-label="Primary"
+          className="rail flex h-[var(--nav-h)] items-center gap-6"
         >
-          <span className="sm:hidden">DW</span>
-          <span className="hidden sm:inline">DAWIT&nbsp;WORKUJIMA</span>
-        </NavLink>
+          <NavLink
+            to="/"
+            className="whitespace-nowrap text-[15px] font-semibold tracking-[-0.015em] text-fg transition-colors duration-150 hover:text-accent"
+          >
+            Dawit Worku
+          </NavLink>
 
-        <ul className="flex items-stretch">
-          {LINKS.map((l) => (
-            <li key={l.to} className="hidden sm:flex">
-              {/* full-height cell keeps the tap target at 44px without growing the bar */}
-              <NavLink
-                to={l.to}
-                className={({ isActive }) =>
-                  `label flex items-center gap-2 whitespace-nowrap px-3 transition-colors duration-150 hover:bg-raised hover:text-fg sm:px-4 ${
-                    isActive ? "label-fg bg-raised" : ""
-                  }`
-                }
-              >
-                <l.Icon size={12} strokeWidth={1.5} aria-hidden className="text-fg" />
-                {l.text}
-              </NavLink>
-            </li>
-          ))}
-          <li className="flex">
+          <ul className="ml-auto hidden items-center gap-1 sm:flex">
+            {LINKS.map((l) => (
+              <li key={l.to}>
+                <NavLink
+                  to={l.to}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 rounded-[var(--radius)] px-3 py-2 text-[14px] transition-colors duration-150 ${
+                      isActive
+                        ? "bg-raised text-fg"
+                        : "text-muted hover:bg-raised hover:text-fg"
+                    }`
+                  }
+                >
+                  <l.Icon size={13} strokeWidth={1.6} aria-hidden />
+                  {l.text}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          <div className="ml-auto flex items-center gap-2 sm:ml-0">
             <CommandPalette />
-          </li>
-          <li className="flex">
             <button
               type="button"
               onClick={() => setEnquiryOpen(true)}
-              className="label label-fg flex items-center whitespace-nowrap border-l border-line px-4 transition-colors duration-150 hover:bg-raised sm:px-5"
+              className="rounded-[var(--radius)] bg-fg px-4 py-2 text-[14px] font-medium text-bg transition-opacity duration-150 hover:opacity-88"
             >
               Hire me
             </button>
-          </li>
-        </ul>
-      </nav>
-    </header>
+          </div>
+        </nav>
+      </header>
 
       <EnquiryModal open={enquiryOpen} onClose={handleClose} />
     </>

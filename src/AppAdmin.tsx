@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import { AdminLayout } from "./components/admin/AdminLayout";
 import { AdminAnalytics } from "./pages/admin/Analytics";
 import { AdminDashboard } from "./pages/admin/Dashboard";
+import { AdminBookings } from "./pages/admin/Bookings";
 import { AdminEnquiries } from "./pages/admin/Enquiries";
 import { AdminLogin } from "./pages/admin/Login";
 import { PostEdit } from "./pages/admin/PostEdit";
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
           { path: "/posts/:id", element: <PostEdit /> },
           { path: "/analytics", element: <AdminAnalytics /> },
           { path: "/enquiries", element: <AdminEnquiries /> },
+          { path: "/bookings", element: <AdminBookings /> },
         ],
       },
     ],

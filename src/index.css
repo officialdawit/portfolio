@@ -20,7 +20,7 @@
   --font-mono: "IBM Plex Mono", "Noto Sans Ethiopic", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --radius: 6px;
-  --nav-h: 56px;
+  --nav-h: 64px;
 }
 
 .animate-marquee {

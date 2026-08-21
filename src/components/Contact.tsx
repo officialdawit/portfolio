@@ -1,5 +1,5 @@
 import { ArrowUpRight, Github, Mail, MessageSquare } from "lucide-react";
-import { EnquiryForm } from "./EnquiryForm";
+import { BookingWidget } from "./BookingWidget";
 import { SectionHead } from "./SectionHead";
 
 const STEPS = [
@@ -33,15 +33,15 @@ export function Contact() {
         <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-16">
           <div>
             <h3 className="max-w-xl text-[26px] font-semibold leading-[1.2] tracking-[-0.02em] sm:text-[32px]">
-              Have something that needs building properly?
+              Pick a time that suits you
             </h3>
             <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-muted">
-              Tell me what it does, who it's for, and when it has to be live.
-              You don't need to know how it should be built — that's my part.
+              Thirty minutes, no charge, no pitch. Bring what you have — a
+              sketch, a document, or just the idea in your head.
             </p>
 
             <div className="mt-9">
-              <EnquiryForm />
+              <BookingWidget />
             </div>
           </div>
 

@@ -110,7 +110,7 @@ export function CommandPalette() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open command palette"
-        className="label flex items-center gap-2 border-l border-line px-3 transition-colors duration-100 hover:bg-raised hover:text-fg sm:px-4"
+        className="flex items-center gap-2 rounded-[var(--radius)] border border-line px-3 py-2 text-[13px] text-muted transition-colors duration-150 hover:border-strong hover:text-fg"
       >
         <Search size={12} strokeWidth={1.75} aria-hidden />
         <span className="hidden items-center gap-0.5 sm:flex">
