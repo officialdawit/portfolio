@@ -23,7 +23,7 @@ const PRINCIPLES = [
 export function Approach() {
   return (
     <section aria-labelledby="approach" className="border-b border-line-soft">
-      <div className="rail">
+      <div className="rail py-14 sm:py-20">
         <SectionHead id="approach" title="How I work" Icon={Lightbulb} />
         <div className="grid grid-cols-1 md:grid-cols-2">
           {PRINCIPLES.map((p) => (

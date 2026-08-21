@@ -46,7 +46,7 @@ const CAPABILITIES = [
 export function Capabilities() {
   return (
     <section aria-labelledby="capabilities" className="border-b border-line-soft">
-      <div className="rail">
+      <div className="rail py-14 sm:py-20">
         <SectionHead id="capabilities" title="What I do" Icon={Layers} />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {CAPABILITIES.map((c, i) => (

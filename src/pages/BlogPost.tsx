@@ -4,10 +4,18 @@ import { Code } from "../components/Code";
 import { PageHead } from "../components/PageHead";
 import { findPost, POSTS } from "../data/posts";
 import { NotFound } from "./NotFound";
+import { useMeta } from "../lib/useMeta";
 
 export function BlogPost() {
   const { slug = "" } = useParams();
   const post = findPost(slug);
+
+  useMeta({
+    title: post?.title ?? "Writing",
+    description: post?.standfirst.slice(0, 180) ?? "A technical write-up.",
+    path: `/blog/${slug}`,
+  });
+
   if (!post) return <NotFound />;
 
   const others = POSTS.filter((p) => p.slug !== slug);

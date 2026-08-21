@@ -1,6 +1,7 @@
 import { Wrench } from "lucide-react";
 import { PageHead } from "../components/PageHead";
 import { SectionHead } from "../components/SectionHead";
+import { useMeta } from "../lib/useMeta";
 
 const GROUPS = [
   {
@@ -40,6 +41,13 @@ const GROUPS = [
 ];
 
 export function Uses() {
+  useMeta({
+    title: "Uses",
+    description:
+      "The editor, shell, frameworks, databases and services I actually build with.",
+    path: "/uses",
+  });
+
   return (
     <>
       <PageHead

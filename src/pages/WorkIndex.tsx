@@ -4,8 +4,16 @@ import { PROJECTS } from "../data/projects";
 import { DETAILS } from "../data/details";
 import { PageHead } from "../components/PageHead";
 import { Reveal } from "../components/Reveal";
+import { useMeta } from "../lib/useMeta";
 
 export function WorkIndex() {
+  useMeta({
+    title: "Work",
+    description:
+      "Six shipped products — review management, event waitlists, uptime monitoring, youth sports, restaurant operations and scheduling.",
+    path: "/work",
+  });
+
   return (
     <>
       <PageHead

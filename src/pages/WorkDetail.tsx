@@ -7,11 +7,19 @@ import { SectionHead } from "../components/SectionHead";
 import { DETAILS } from "../data/details";
 import { PROJECTS } from "../data/projects";
 import { NotFound } from "./NotFound";
+import { useMeta } from "../lib/useMeta";
 
 export function WorkDetail() {
   const { slug = "" } = useParams();
   const project = PROJECTS.find((p) => p.slug === slug);
   const detail = DETAILS[slug];
+
+  useMeta({
+    title: project ? `${project.name} — ${project.kind}` : "Work",
+    description: project?.summary.slice(0, 180) ?? "A shipped product.",
+    path: `/work/${slug}`,
+  });
+
   if (!project || !detail) return <NotFound />;
 
   const others = PROJECTS.filter((p) => p.slug !== slug).slice(0, 3);

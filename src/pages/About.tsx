@@ -2,6 +2,7 @@ import { MapPin, User } from "lucide-react";
 import { PageHead } from "../components/PageHead";
 import { Reveal } from "../components/Reveal";
 import { SectionHead } from "../components/SectionHead";
+import { useMeta } from "../lib/useMeta";
 
 const TIMELINE = [
   { year: "2026", title: "Gebeta, Meskot", body: "Two Ethiopian-market products in build — restaurant operations and scheduling, both bilingual from the schema up." },
@@ -17,6 +18,13 @@ const PRINCIPLES = [
 ];
 
 export function About() {
+  useMeta({
+    title: "About",
+    description:
+      "Mobile developer, web developer and system architect in Addis Ababa. How I work and what I have shipped.",
+    path: "/about",
+  });
+
   return (
     <>
       <PageHead

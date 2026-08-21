@@ -7,12 +7,8 @@ export function Hero() {
     <section id="top" className="border-b border-line-soft">
       <div className="rail grid grid-cols-1 lg:grid-cols-[1fr_340px]">
         <div className="px-4 py-16 sm:px-6 sm:py-24">
-          <div className="eyebrow">
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-            <span className="label text-fg">Addis Ababa — available for work</span>
-          </div>
 
-          <h1 className="mt-8 max-w-3xl text-[40px] font-semibold leading-[1.03] tracking-[-0.035em] sm:text-[64px]">
+          <h1 className="max-w-3xl text-[40px] font-semibold leading-[1.03] tracking-[-0.035em] sm:text-[64px]">
             I build apps and web products, start to finish.
           </h1>
 

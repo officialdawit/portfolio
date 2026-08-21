@@ -3,8 +3,16 @@ import { Link } from "react-router-dom";
 import { PageHead } from "../components/PageHead";
 import { Reveal } from "../components/Reveal";
 import { POSTS } from "../data/posts";
+import { useMeta } from "../lib/useMeta";
 
 export function BlogIndex() {
+  useMeta({
+    title: "Writing",
+    description:
+      "Short technical write-ups on problems hit in production and what the fix actually was.",
+    path: "/blog",
+  });
+
   return (
     <>
       <PageHead
