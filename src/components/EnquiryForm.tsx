@@ -1,4 +1,6 @@
-import { Check, Loader2, Send } from "lucide-react";
+import { Check, Send } from "lucide-react";
+import { BorderBeam } from "./fx/BorderBeam";
+import { ThinkingOrb } from "./fx/ThinkingOrb";
 import { useState, type FormEvent } from "react";
 
 const TIMINGS = ["as soon as possible", "next few months", "just exploring", "not sure"] as const;
@@ -139,18 +141,20 @@ export function EnquiryForm() {
       ) : null}
 
       <div className="flex flex-wrap items-center gap-4">
-        <button
-          type="submit"
-          disabled={state === "sending"}
-          className="inline-flex min-h-12 items-center gap-2 rounded-[var(--radius)] bg-fg px-6 text-[15px] font-medium text-bg transition-opacity duration-150 hover:opacity-88 disabled:opacity-60"
-        >
-          {state === "sending" ? (
-            <Loader2 size={15} strokeWidth={2} aria-hidden className="animate-spin" />
-          ) : (
-            <Send size={15} strokeWidth={1.75} aria-hidden />
-          )}
-          {state === "sending" ? "Sending" : "Send it"}
-        </button>
+        <BorderBeam>
+          <button
+            type="submit"
+            disabled={state === "sending"}
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[calc(var(--radius)-1px)] bg-fg px-6 text-[15px] font-medium text-bg transition-opacity duration-150 hover:opacity-88 disabled:opacity-60"
+          >
+            {state === "sending" ? (
+              <ThinkingOrb size={15} />
+            ) : (
+              <Send size={15} strokeWidth={1.75} aria-hidden />
+            )}
+            {state === "sending" ? "Sending" : "Send it"}
+          </button>
+        </BorderBeam>
         <span className="text-[14px] text-muted">Or email me directly — link below.</span>
       </div>
     </form>

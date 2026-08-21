@@ -193,3 +193,138 @@
     transform: none;
   }
 }
+
+/* --- Effects -------------------------------------------------------------
+   Each one is used in exactly one role. A beam on every button, or an orb in
+   every corner, is how this stops looking designed and starts looking generated.
+   ------------------------------------------------------------------------ */
+
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+.beam-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--beam-angle),
+    transparent 0deg,
+    transparent 300deg,
+    color-mix(in srgb, var(--color-accent) 90%, white) 340deg,
+    var(--color-accent) 352deg,
+    transparent 360deg
+  );
+  animation: beam-spin 4.5s linear infinite;
+}
+
+/* the pad on .beam leaves a 1px gap; this keeps the fill opaque above it */
+.beam > span:last-child {
+  background: var(--color-bg);
+}
+
+@keyframes orb-pulse {
+  0%,
+  100% {
+    transform: scale(0.82);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes orb-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orb-core {
+  position: absolute;
+  inset: 26%;
+  border-radius: 999px;
+  background: currentColor;
+  animation: orb-pulse 1.4s ease-in-out infinite;
+}
+
+.orb-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  animation: orb-orbit 1.6s linear infinite;
+}
+
+.orb-ring::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 22%;
+  height: 22%;
+  margin-left: -11%;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.85;
+}
+
+.orb-ring--slow {
+  animation-duration: 2.6s;
+  animation-direction: reverse;
+  opacity: 0.5;
+}
+
+/* One sheen across the headline on arrival only. Never loops. */
+@keyframes sheen-once {
+  0% {
+    background-position: -140% 0;
+  }
+  85% {
+    background-position: 240% 0;
+    color: transparent;
+  }
+  /* land on solid type — holding the gradient leaves words permanently tinted */
+  100% {
+    background-position: 240% 0;
+    color: var(--color-fg);
+  }
+}
+
+.sheen {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-fg) 40%,
+    color-mix(in srgb, var(--color-accent) 55%, var(--color-fg)) 50%,
+    var(--color-fg) 60%
+  );
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: sheen-once 1400ms ease-out 250ms 1 forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam-ring,
+  .orb-core,
+  .orb-ring {
+    animation: none;
+  }
+  .beam-ring {
+    background: var(--color-line);
+  }
+  .sheen {
+    animation: none;
+    background: none;
+    color: var(--color-fg);
+  }
+}

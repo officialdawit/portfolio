@@ -1,4 +1,5 @@
-import { Loader2, Save } from "lucide-react";
+import { Save } from "lucide-react";
+import { ThinkingOrb } from "../../components/fx/ThinkingOrb";
 import { useEffect, useState, type FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AdminChrome, Field, inputClass } from "../../components/admin/AdminChrome";
@@ -142,7 +143,7 @@ export function PostEdit() {
 
               <div className="flex gap-3">
                 <button type="submit" disabled={saving || !blocksValid} className="label label-fg inline-flex min-h-11 items-center gap-2 border border-line bg-raised px-4 transition-colors duration-150 hover:border-strong disabled:opacity-60">
-                  {saving ? <Loader2 size={12} strokeWidth={1.75} aria-hidden className="animate-spin" /> : <Save size={12} strokeWidth={1.75} aria-hidden />}
+                  {saving ? <ThinkingOrb size={13} /> : <Save size={12} strokeWidth={1.75} aria-hidden />}
                   {saving ? "Saving" : "Save"}
                 </button>
                 <button type="button" onClick={() => navigate("/posts")} className="label inline-flex min-h-11 items-center border border-line px-4 transition-colors duration-150 hover:border-strong hover:text-fg">

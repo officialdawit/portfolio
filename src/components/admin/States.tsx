@@ -1,10 +1,11 @@
-import { AlertTriangle, Inbox, Loader2 } from "lucide-react";
+import { AlertTriangle, Inbox } from "lucide-react";
+import { ThinkingOrb } from "../fx/ThinkingOrb";
 import type { ReactNode } from "react";
 
 export function Loading({ text = "Loading" }: { text?: string }) {
   return (
     <div className="flex items-center justify-center gap-3 px-4 py-16">
-      <Loader2 size={14} strokeWidth={1.75} aria-hidden className="animate-spin text-muted" />
+      <ThinkingOrb size={16} />
       <span className="label">{text}</span>
     </div>
   );

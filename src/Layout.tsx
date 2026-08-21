@@ -1,6 +1,8 @@
 import { Analytics } from "@vercel/analytics/react";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { Footer } from "./components/Footer";
+import { GooeyDefs } from "./components/fx/Gooey";
+import { PageFade } from "./components/fx/PageFade";
 import { BackToTop } from "./components/BackToTop";
 import { MobileDock } from "./components/MobileDock";
 import { ScrollProgress } from "./components/ScrollProgress";
@@ -19,13 +21,16 @@ export function Layout() {
       <Nav />
       <ScrollProgress />
       <main id="main">
-        <Outlet />
+        <PageFade>
+          <Outlet />
+        </PageFade>
       </main>
       <div className="pb-[92px] sm:pb-0">
         <Footer />
       </div>
       <MobileDock />
       <BackToTop />
+      <GooeyDefs />
       <ScrollRestoration />
       <Analytics />
     </Shell>

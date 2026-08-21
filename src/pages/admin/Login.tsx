@@ -1,4 +1,5 @@
-import { Lock, Loader2 } from "lucide-react";
+import { Lock } from "lucide-react";
+import { ThinkingOrb } from "../../components/fx/ThinkingOrb";
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Field, inputClass } from "../../components/admin/AdminChrome";
@@ -72,7 +73,7 @@ export function AdminLogin() {
             >
               {pending ? (
                 <>
-                  <Loader2 size={12} strokeWidth={1.75} aria-hidden className="animate-spin" />
+                  <ThinkingOrb size={13} />
                   Signing in
                 </>
               ) : (

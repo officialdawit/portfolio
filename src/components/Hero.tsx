@@ -8,7 +8,7 @@ export function Hero() {
       <div className="rail grid grid-cols-1 lg:grid-cols-[1fr_340px]">
         <div className="px-4 py-16 sm:px-6 sm:py-24">
 
-          <h1 className="max-w-3xl text-[40px] font-semibold leading-[1.03] tracking-[-0.035em] sm:text-[64px]">
+          <h1 className="sheen max-w-3xl text-[40px] font-semibold leading-[1.03] tracking-[-0.035em] sm:text-[64px]">
             I build apps and web products, start to finish.
           </h1>
 
