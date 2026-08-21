@@ -16,14 +16,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!db) return res.status(503).json({ error: "database_not_configured" });
   if (!(await currentAdmin(req))) return res.status(401).json({ error: "unauthorized" });
 
+  // Vercel reserves the VERCEL_ prefix and injects its own values at runtime,
+  // which silently overwrote these with the admin project's id in production.
   const token = process.env.VERCEL_TOKEN;
-  const projectId = process.env.VERCEL_PROJECT_ID;
-  const teamId = process.env.VERCEL_TEAM_ID;
+  const projectId = process.env.ANALYTICS_PROJECT_ID;
+  const teamId = process.env.ANALYTICS_TEAM_ID;
 
   if (!token || !projectId) {
     return res.status(200).json({
       configured: false,
-      reason: "Set VERCEL_TOKEN and VERCEL_PROJECT_ID to enable analytics.",
+      reason: "Set VERCEL_TOKEN and ANALYTICS_PROJECT_ID to enable analytics.",
     });
   }
 
@@ -84,6 +86,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(200).json({
         configured: false,
         reason: "Vercel rejected the token. Check VERCEL_TOKEN scope and team access.",
+      });
+    }
+    if (status === "400") {
+      return res.status(200).json({
+        configured: false,
+        reason: "Web Analytics is not enabled for that project, or the project id is wrong.",
       });
     }
     if (status === "404") {
