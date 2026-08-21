@@ -2,6 +2,7 @@ import {
   Boxes, Cloud, Container, CreditCard, Database, KeyRound,
   Lock, Mail, Server, Workflow, Zap,
 } from "lucide-react";
+import { BrandIcon, hasBrandIcon } from "./BrandIcon";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
 
@@ -47,7 +48,11 @@ export function Integrations() {
                     aria-hidden
                     className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius)] border border-line text-muted transition-colors duration-150 group-hover:border-accent group-hover:text-accent"
                   >
-                    <s.Icon size={14} strokeWidth={1.6} />
+                    {hasBrandIcon(s.name) ? (
+                      <BrandIcon name={s.name} size={14} />
+                    ) : (
+                      <s.Icon size={14} strokeWidth={1.6} />
+                    )}
                   </span>
                   <span className="flex min-w-0 flex-col">
                     <span className="text-[14px] font-medium text-fg">{s.name}</span>

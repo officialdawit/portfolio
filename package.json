@@ -28,6 +28,7 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.18.2",
     "react-use-measure": "^2.1.7",
+    "simple-icons": "^16.28.0",
     "tailwind-merge": "^3.6.0",
     "tunnel-rat": "^0.1.2"
   },

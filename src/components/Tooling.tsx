@@ -17,6 +17,7 @@ import {
   Terminal as TerminalIcon,
   Workflow,
 } from "lucide-react";
+import { BrandIcon, hasBrandIcon } from "./BrandIcon";
 import { IconCell } from "./IconCell";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
@@ -56,7 +57,13 @@ export function Tooling() {
           {TOOLS.map((t, i) => (
             <Reveal key={t.name} delay={(i % 5) * 30}>
               <div className="group flex h-full items-center gap-3 border-b border-r border-line-soft px-3 py-4 transition-colors duration-150 hover:bg-raised sm:px-4">
-                <IconCell Icon={t.Icon} size="sm" />
+                {hasBrandIcon(t.name) ? (
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius)] border border-line bg-raised text-fg transition-colors duration-150 group-hover:border-accent group-hover:text-accent">
+                    <BrandIcon name={t.name} size={14} />
+                  </span>
+                ) : (
+                  <IconCell Icon={t.Icon} size="sm" />
+                )}
                 <span className="flex min-w-0 flex-col">
                   <span className="label label-fg truncate">{t.name}</span>
                   <span className="label truncate text-dim">{t.role}</span>
