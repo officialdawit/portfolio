@@ -31,7 +31,7 @@ export function Code({ caption, meta, lang, code, copyable = true }: Props) {
           <button
             type="button"
             onClick={handleCopy}
-            className="label ml-auto flex min-h-8 shrink-0 items-center gap-1.5 border border-line px-2.5 py-1.5 transition-colors duration-100 hover:border-strong hover:bg-raised hover:text-fg"
+            className="label ml-auto flex min-h-8 shrink-0 items-center gap-2 border border-line px-3 py-2 transition-colors duration-100 hover:border-strong hover:bg-raised hover:text-fg"
           >
             {copied ? (
               <Check size={11} strokeWidth={2} aria-hidden />

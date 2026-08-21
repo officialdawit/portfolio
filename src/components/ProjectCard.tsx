@@ -40,7 +40,7 @@ export function ProjectCard({ project }: { project: Project }) {
           <Icon size={15} strokeWidth={1.5} />
         </span>
         <span className="label">{kind}</span>
-        <span className="label ml-auto inline-flex items-center gap-1.5">
+        <span className="label ml-auto inline-flex items-center gap-2">
           <span
             aria-hidden
             className={
@@ -75,7 +75,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 size={13}
                 strokeWidth={1.75}
                 aria-hidden
-                className="mt-0.5 shrink-0 text-fg"
+                className="mt-1 shrink-0 text-fg"
               />
               <span className="text-[14px] leading-relaxed text-muted">{line}</span>
             </li>
@@ -96,7 +96,7 @@ export function ProjectCard({ project }: { project: Project }) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="label label-fg group mt-6 inline-flex w-fit items-center gap-1.5 border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:bg-raised"
+          className="label label-fg group mt-6 inline-flex w-fit items-center gap-2 border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:bg-raised"
         >
           Visit {name}
           <ArrowUpRight

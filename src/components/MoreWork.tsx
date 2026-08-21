@@ -36,7 +36,7 @@ export function MoreWork() {
                       className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover/tile:scale-[1.04]"
                     />
                   </span>
-                  <span className="flex items-center gap-2 px-3 py-2.5">
+                  <span className="flex items-center gap-2 px-3 py-3">
                     <span className="truncate text-[13px] font-medium text-fg">{w.name}</span>
                     <ArrowUpRight
                       size={12}

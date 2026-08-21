@@ -63,7 +63,7 @@ export function BlogPost() {
               if (b.type === "note")
                 return (
                   <aside key={i} className="flex gap-3 border border-line bg-card px-4 py-4">
-                    <Info size={14} strokeWidth={1.5} aria-hidden className="mt-0.5 shrink-0 text-fg" />
+                    <Info size={14} strokeWidth={1.5} aria-hidden className="mt-1 shrink-0 text-fg" />
                     <p className="text-[14px] leading-relaxed text-muted">{b.text}</p>
                   </aside>
                 );

@@ -76,7 +76,7 @@ export function PostsAdmin() {
                   <span className="label text-dim">/blog/{row.slug}</span>
                 </span>
                 <time className="label" dateTime={row.date}>{row.date}</time>
-                <span className="label inline-flex items-center gap-1.5">
+                <span className="label inline-flex items-center gap-2">
                   <span
                     aria-hidden
                     className={row.published ? "h-1.5 w-1.5 bg-fg" : "h-1.5 w-1.5 border border-strong"}
@@ -86,7 +86,7 @@ export function PostsAdmin() {
                 <span className="flex items-center gap-2 lg:justify-end">
                   <Link
                     to={`/admin/posts/${row.id}`}
-                    className="label label-fg border border-line px-2.5 py-1.5 transition-colors duration-150 hover:border-strong hover:bg-raised"
+                    className="label label-fg border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:bg-raised"
                   >
                     Edit
                   </Link>
@@ -95,7 +95,7 @@ export function PostsAdmin() {
                     onClick={() => handleDelete(row)}
                     disabled={busy === row.id}
                     aria-label={`Delete ${row.title}`}
-                    className="label inline-flex items-center border border-line px-2.5 py-1.5 transition-colors duration-150 hover:border-strong hover:text-fg disabled:opacity-50"
+                    className="label inline-flex items-center border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:text-fg disabled:opacity-50"
                   >
                     <Trash2 size={11} strokeWidth={1.5} aria-hidden />
                   </button>

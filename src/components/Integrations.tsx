@@ -42,7 +42,7 @@ export function Integrations() {
               {SERVICES.map((s) => (
                 <li
                   key={s.name}
-                  className="group flex items-center gap-3 bg-card px-4 py-3.5 transition-colors duration-150 hover:bg-raised"
+                  className="group flex items-center gap-3 bg-card px-4 py-4 transition-colors duration-150 hover:bg-raised"
                 >
                   <span
                     aria-hidden

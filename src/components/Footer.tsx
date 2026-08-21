@@ -36,11 +36,11 @@ export function Footer() {
         <div className="grid grid-cols-1 border-b border-line-soft sm:grid-cols-2 lg:grid-cols-4">
           <div className="border-b border-line-soft px-4 py-8 sm:px-6 lg:border-b-0 lg:border-r">
             <p className="label label-fg tracking-[0.14em]">DAWIT WORKUJIMA</p>
-            <p className="label mt-3 inline-flex items-center gap-1.5">
+            <p className="label mt-3 inline-flex items-center gap-2">
               <MapPin size={11} strokeWidth={1.5} aria-hidden />
               Addis Ababa, Ethiopia
             </p>
-            <p className="label mt-2 inline-flex items-center gap-1.5">
+            <p className="label mt-2 inline-flex items-center gap-2">
               <span aria-hidden className="h-1.5 w-1.5 bg-fg" />
               Available for work
             </p>
@@ -63,7 +63,7 @@ export function Footer() {
                       <Link
                         to={l.href}
                         reloadDocument={false}
-                        className="label inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-fg"
+                        className="label inline-flex items-center gap-2 transition-colors duration-150 hover:text-fg"
                       >
                         {l.text === "GitHub" ? (
                           <Github size={11} strokeWidth={1.5} aria-hidden />
@@ -87,7 +87,7 @@ export function Footer() {
           </span>
           <Link
             to="/"
-            className="label inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-fg"
+            className="label inline-flex items-center gap-2 transition-colors duration-150 hover:text-fg"
           >
             <ArrowUp size={11} strokeWidth={1.75} aria-hidden />
             Back to top

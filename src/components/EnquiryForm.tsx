@@ -8,7 +8,7 @@ const TIMINGS = ["as soon as possible", "next few months", "just exploring", "no
 type State = "idle" | "sending" | "sent";
 
 const field =
-  "w-full rounded-[var(--radius)] border border-line bg-card px-3.5 py-3 text-[15px] text-fg outline-none transition-colors duration-150 placeholder:text-dim focus:border-strong";
+  "w-full rounded-[var(--radius)] border border-line bg-card px-4 py-3 text-[15px] text-fg outline-none transition-colors duration-150 placeholder:text-dim focus:border-strong";
 
 export function EnquiryForm() {
   const [state, setState] = useState<State>("idle");
@@ -131,7 +131,7 @@ export function EnquiryForm() {
       />
 
       {issues.length > 0 ? (
-        <div role="alert" className="flex flex-col gap-1.5 rounded-[var(--radius)] border border-line bg-card px-4 py-3">
+        <div role="alert" className="flex flex-col gap-2 rounded-[var(--radius)] border border-line bg-card px-4 py-3">
           {issues.map((i) => (
             <p key={i} className="text-[14px] text-fg">
               {i}

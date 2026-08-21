@@ -75,7 +75,7 @@ export function AdminEnquiries() {
                 <span className="text-[15px] font-semibold text-fg">{r.name}</span>
                 <a
                   href={`mailto:${r.email}`}
-                  className="label inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-fg"
+                  className="label inline-flex items-center gap-2 transition-colors duration-150 hover:text-fg"
                 >
                   <Mail size={11} strokeWidth={1.5} aria-hidden />
                   {r.email}
@@ -100,7 +100,7 @@ export function AdminEnquiries() {
                   <button
                     type="button"
                     onClick={() => markRead(r.id)}
-                    className="label ml-auto inline-flex items-center gap-1.5 rounded-[var(--radius)] border border-line px-2.5 py-1.5 transition-colors duration-150 hover:border-strong hover:text-fg"
+                    className="label ml-auto inline-flex items-center gap-2 rounded-[var(--radius)] border border-line px-3 py-2 transition-colors duration-150 hover:border-strong hover:text-fg"
                   >
                     <Check size={11} strokeWidth={1.75} aria-hidden />
                     Mark read

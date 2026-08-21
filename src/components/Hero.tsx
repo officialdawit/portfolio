@@ -28,7 +28,7 @@ export function Hero() {
             </a>
             <a
               href="mailto:officialdawitworku@gmail.com"
-              className="group flex items-center gap-1.5 rounded-[var(--radius)] border border-line px-5 py-3 text-[14px] text-muted transition-colors duration-150 hover:border-strong hover:text-fg"
+              className="group flex items-center gap-2 rounded-[var(--radius)] border border-line px-5 py-3 text-[14px] text-muted transition-colors duration-150 hover:border-strong hover:text-fg"
             >
               officialdawitworku@gmail.com
               <ArrowUpRight

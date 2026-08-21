@@ -17,7 +17,7 @@ export function StatusPanel({
       <div className="flex items-center gap-2.5 border-b border-line px-3 py-2">
         <Activity size={12} strokeWidth={1.5} aria-hidden className="text-fg" />
         <span className="label label-fg">System status</span>
-        <span className="label ml-auto inline-flex items-center gap-1.5">
+        <span className="label ml-auto inline-flex items-center gap-2">
           <span aria-hidden className={allOk ? "h-1.5 w-1.5 bg-fg" : "h-1.5 w-1.5 border border-strong"} />
           {allOk ? "All systems normal" : "Degraded"}
         </span>

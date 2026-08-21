@@ -88,8 +88,8 @@ export function WorkDetail() {
           <SectionHead index="04" title="Outcome" />
           <ul className="px-4 py-6 sm:px-6">
             {detail.outcome.map((o) => (
-              <li key={o} className="flex items-start gap-3 border-b border-line-soft py-3.5 last:border-b-0">
-                <CheckCircle2 size={14} strokeWidth={1.5} aria-hidden className="mt-0.5 shrink-0 text-fg" />
+              <li key={o} className="flex items-start gap-3 border-b border-line-soft py-4 last:border-b-0">
+                <CheckCircle2 size={14} strokeWidth={1.5} aria-hidden className="mt-1 shrink-0 text-fg" />
                 <span className="text-[15px] leading-relaxed text-muted">{o}</span>
               </li>
             ))}
@@ -100,7 +100,7 @@ export function WorkDetail() {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label label-fg inline-flex items-center gap-1.5 border border-line px-4 py-3 transition-colors duration-150 hover:border-strong hover:bg-raised"
+                className="label label-fg inline-flex items-center gap-2 border border-line px-4 py-3 transition-colors duration-150 hover:border-strong hover:bg-raised"
               >
                 Visit {project.name}
                 <ArrowUpRight size={12} strokeWidth={1.75} aria-hidden />
@@ -108,7 +108,7 @@ export function WorkDetail() {
             ) : null}
             <a
               href="mailto:officialdawitworku@gmail.com"
-              className="label inline-flex items-center gap-1.5 border border-line px-4 py-3 transition-colors duration-150 hover:border-strong hover:text-fg"
+              className="label inline-flex items-center gap-2 border border-line px-4 py-3 transition-colors duration-150 hover:border-strong hover:text-fg"
             >
               Ask me about this build
             </a>

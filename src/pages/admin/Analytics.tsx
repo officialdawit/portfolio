@@ -59,7 +59,7 @@ export function AdminAnalytics() {
               key={r}
               type="button"
               onClick={() => setDays(r)}
-              className={`label px-3 py-1.5 transition-colors duration-100 ${
+              className={`label px-3 py-2 transition-colors duration-100 ${
                 r === days ? "label-fg bg-raised" : "hover:bg-raised hover:text-fg"
               } ${r !== 90 ? "border-r border-line" : ""}`}
             >

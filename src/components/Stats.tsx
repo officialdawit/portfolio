@@ -18,7 +18,7 @@ export function Stats() {
               i % 2 === 0 ? "border-r lg:border-r" : ""
             } ${i < 2 ? "border-b lg:border-b-0" : ""} border-line-soft`}
           >
-            <p className="flex items-baseline gap-1.5">
+            <p className="flex items-baseline gap-2">
               <span className="text-[30px] font-medium leading-none tracking-[-0.02em] sm:text-[38px]">
                 <CountUp value={s.value} />
               </span>

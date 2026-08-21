@@ -19,7 +19,7 @@ export function PageHead({ eyebrow, title, standfirst, Icon, back, meta }: Props
         {back ? (
           <Link
             to={back.to}
-            className="label mb-8 inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-fg"
+            className="label mb-8 inline-flex items-center gap-2 transition-colors duration-150 hover:text-fg"
           >
             <ChevronLeft size={12} strokeWidth={1.75} aria-hidden />
             {back.text}

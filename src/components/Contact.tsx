@@ -30,7 +30,7 @@ export function Contact() {
       <div className="rail py-14 sm:py-20">
         <SectionHead id="contact" title="Start a conversation" Icon={MessageSquare} />
 
-        <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16">
+        <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-16">
           <div>
             <h3 className="max-w-xl text-[26px] font-semibold leading-[1.2] tracking-[-0.02em] sm:text-[32px]">
               Have something that needs building properly?
@@ -53,7 +53,7 @@ export function Contact() {
                   <li key={step} className="flex gap-3">
                     <span
                       aria-hidden
-                      className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-line font-mono text-[10px] text-accent"
+                      className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-line font-mono text-[10px] text-accent"
                     >
                       {i + 1}
                     </span>
@@ -72,7 +72,7 @@ export function Contact() {
                       href={href}
                       target={href.startsWith("http") ? "_blank" : undefined}
                       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-3 bg-card px-4 py-3.5 transition-colors duration-150 hover:bg-raised"
+                      className="group flex items-center gap-3 bg-card px-4 py-4 transition-colors duration-150 hover:bg-raised"
                     >
                       <Icon size={14} strokeWidth={1.6} aria-hidden className="shrink-0 text-muted transition-colors duration-150 group-hover:text-accent" />
                       <span className="flex min-w-0 flex-col">

@@ -166,7 +166,7 @@ const AccordionItem: FC<AccordionItemProps> = ({
             className="overflow-hidden will-change-transform"
           >
             <div ref={ref}>
-              <div className="max-w-2xl px-5 pb-5 text-[15px] font-medium leading-relaxed text-muted md:text-[16px]">
+              <div className="max-w-[68ch] px-5 pb-5 text-[15px] font-medium leading-relaxed text-muted md:text-[16px]">
                 {item.content}
               </div>
             </div>

@@ -178,7 +178,7 @@ export function CommandPalette() {
             </ul>
 
             <div className="flex items-center gap-4 border-t border-line px-3 py-2">
-              <span className="label inline-flex items-center gap-1.5 text-dim">
+              <span className="label inline-flex items-center gap-2 text-dim">
                 <CornerDownLeft size={10} strokeWidth={1.75} aria-hidden /> open
               </span>
               <span className="label text-dim">↑↓ navigate</span>

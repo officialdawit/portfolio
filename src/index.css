@@ -154,9 +154,10 @@
   /* the vertical rail container every section sits inside */
   .rail {
     width: 100%;
-    max-width: 1180px;
+    max-width: 1440px;
     margin-inline: auto;
-    padding-inline: clamp(1rem, 4vw, 2.5rem);
+    /* 16px on phones, easing to 32px on desktop — was eating ~150px a side */
+    padding-inline: clamp(1rem, 2.5vw, 2rem);
   }
 
   /* code blocks scroll inside their own frame — keep the affordance quiet */

@@ -34,12 +34,12 @@ export function WorkIndex() {
                   className="group grid grid-cols-1 items-center gap-4 border-b border-line-soft px-4 py-6 transition-colors duration-150 hover:bg-raised sm:px-6 lg:grid-cols-[80px_1fr_180px_120px]"
                 >
                   <span className="label label-fg">{p.index}</span>
-                  <span className="flex flex-col gap-1.5">
+                  <span className="flex flex-col gap-2">
                     <span className="text-[19px] font-medium tracking-[-0.01em]">{p.name}</span>
                     <span className="label">{p.headline}</span>
                   </span>
                   <span className="label hidden lg:block">{d?.year ?? ""}</span>
-                  <span className="label label-fg inline-flex items-center gap-1.5 lg:justify-end">
+                  <span className="label label-fg inline-flex items-center gap-2 lg:justify-end">
                     Read
                     <span aria-hidden className="transition-transform duration-150 group-hover:translate-x-0.5">→</span>
                   </span>

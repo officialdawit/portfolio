@@ -46,7 +46,7 @@ export function BlogIndex() {
                   {post.title}
                 </h2>
                 <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted">{post.standfirst}</p>
-                <span className="label label-fg mt-5 inline-flex items-center gap-1.5">
+                <span className="label label-fg mt-5 inline-flex items-center gap-2">
                   Read
                   <span aria-hidden className="transition-transform duration-150 group-hover:translate-x-0.5">→</span>
                 </span>

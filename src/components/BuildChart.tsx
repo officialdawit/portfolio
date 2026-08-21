@@ -111,7 +111,7 @@ export function BuildChart() {
               key={p.label}
               className="border-b border-r border-line-soft px-4 py-5 sm:px-6"
             >
-              <p className="flex items-baseline gap-1.5">
+              <p className="flex items-baseline gap-2">
                 <span className="text-[22px] font-medium leading-none tracking-[-0.02em]">
                   {p.js}
                 </span>
